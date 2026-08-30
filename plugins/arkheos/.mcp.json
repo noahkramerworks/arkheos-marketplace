@@ -2,7 +2,10 @@
   "mcpServers": {
     "arkheos": {
       "command": "node",
-      "args": ["mcp/server.mjs"]
+      "args": ["mcp/server.mjs"],
+      "env": {
+        "ARKHEOS_TRUSTED_KEYS_JSON": "{\"arkheos-release-2026-08\":{\"crv\":\"Ed25519\",\"x\":\"YgGa-H7sMGIaT2lGhcEd8iPgzNmm0QXLTyXyeduHRS0\",\"kty\":\"OKP\"}}"
+      }
     }
   }
 }
