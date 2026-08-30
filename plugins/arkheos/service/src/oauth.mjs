@@ -23,7 +23,7 @@ export async function deviceCode(request, env) {
   if (!/^[A-Za-z0-9_-]{16,128}$/u.test(value.installationId || "")) return json({ code: "INVALID_INSTALLATION" }, 400);
   const device = secureToken(32); const user = secureToken(6).slice(0, 8).toUpperCase();
   await env.DB.prepare("INSERT INTO device_codes (device_code_hash,user_code,installation_id,status,expires_at,created_at) VALUES (?,?,?,'pending',?,?)").bind(await sha256Hex(device), user, value.installationId, future(600), now()).run();
-  return json({ device_code: device, user_code: user, verification_uri: `${env.ACCOUNT_ORIGIN}/device`, verification_uri_complete: `${env.ACCOUNT_ORIGIN}/device?code=${encodeURIComponent(user)}`, expires_in: 600, interval: 5 });
+  return json({ device_code: device, user_code: user, verification_uri: `${env.ACCOUNT_ORIGIN}/account`, verification_uri_complete: `${env.ACCOUNT_ORIGIN}/account?code=${encodeURIComponent(user)}`, expires_in: 600, interval: 5 });
 }
 
 export async function approveDevice(request, env) {

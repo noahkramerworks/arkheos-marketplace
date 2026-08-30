@@ -2,7 +2,7 @@
   "schema_version": 2,
   "target": "C:\\Users\\rizek\\plugins\\arkheos",
   "design": "C:\\Users\\rizek\\plugins\\arkheos\\design\\plugin.md",
-  "audited_at": "2026-08-30T18:26:30.969Z",
+  "audited_at": "2026-08-30T18:43:35.897Z",
   "checks": [
     {
       "name": "personal-interface-assets",

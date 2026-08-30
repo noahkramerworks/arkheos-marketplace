@@ -3,12 +3,20 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
 import { sha256Hex } from "../src/domain.mjs";
-import { metadata, token } from "../src/oauth.mjs";
+import { deviceCode, metadata, token } from "../src/oauth.mjs";
 
 function d1(database) {
   const prepare = (sql) => ({ bind: (...values) => ({ first: async () => database.prepare(sql).get(...values) || null, run: async () => { const result = database.prepare(sql).run(...values); return { meta: { changes: Number(result.changes) } }; } }) });
   return { prepare, batch: async (statements) => { const results = []; for (const statement of statements) results.push(await statement.run()); return results; } };
 }
+
+test("device authorization returns the query-preserving account entry route", async () => {
+  const database = new DatabaseSync(":memory:"); database.exec(await readFile(new URL("../migrations/0001_initial.sql", import.meta.url), "utf8")); database.exec(await readFile(new URL("../migrations/0002_arkheos_membership.sql", import.meta.url), "utf8"));
+  const response = await deviceCode(new Request("https://api.arkheos.ai/v1/device/code", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ installationId: "installation-1234567890" }) }), { DB: d1(database), ACCOUNT_ORIGIN: "https://account.arkheos.ai" });
+  const body = await response.json();
+  assert.equal(body.verification_uri, "https://account.arkheos.ai/account");
+  assert.equal(body.verification_uri_complete, `https://account.arkheos.ai/account?code=${encodeURIComponent(body.user_code)}`);
+});
 
 test("device metadata advertises only implemented grants and sign-out grant revokes the complete token family", async () => {
   const database = new DatabaseSync(":memory:"); database.exec(await readFile(new URL("../migrations/0001_initial.sql", import.meta.url), "utf8")); database.exec(await readFile(new URL("../migrations/0002_arkheos_membership.sql", import.meta.url), "utf8"));
