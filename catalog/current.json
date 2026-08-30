@@ -1,14 +1,14 @@
 {
   "schema": "arkheos.catalog/v1",
-  "revision": "3c755a511bb7b746cb61215628a294000394dbdf30b1ac6e8cf1fc53163053ea",
-  "issuedAt": "2026-08-30T17:00:22.418Z",
-  "expiresAt": "2027-08-30T17:00:22.418Z",
+  "revision": "b29d7ee862e51a0ad2c6d1fb7b71bafe1fccca944bb805f0c4a578edf0949cff",
+  "issuedAt": "2026-08-30T18:00:34.195Z",
+  "expiresAt": "2027-08-30T18:00:34.195Z",
   "products": [
     {
       "id": "stream-showrunner",
       "name": "Stream Showrunner",
       "channel": "stable",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "platforms": [
         "windows"
       ],
@@ -22,6 +22,6 @@
   "signature": {
     "algorithm": "Ed25519",
     "keyId": "arkheos-release-2026-08",
-    "value": "o1K3zjg-4SkaufCveSBh_C7SP89h5vU1TLke37nHLdAxhgO2g1kWZpjKI54isT_bL_1dg_gywhDay02iB1skCg"
+    "value": "e8rcxtKWHBvO5q4wqxAvKAnYr11Ph2P2hUe6YF_iEnto2ymzU6gGeR3d4H7INdtnEcOJVCajzOmE9mAhRm_VDw"
   }
 }
