@@ -16,6 +16,11 @@ function safeChannel(value = "stable") {
   return value;
 }
 
+function safeVersion(value) {
+  if (value !== undefined && !/^[0-9]+(?:\.[0-9]+){2}(?:-[0-9A-Za-z.-]+)?$/u.test(value)) throw new TypeError("Invalid release version");
+  return value;
+}
+
 export class ArkheosApi {
   constructor({ state, transport, trustedKeys = {}, now = () => new Date() } = {}) {
     if (!state) throw new TypeError("ArkheosApi requires state");
@@ -26,7 +31,7 @@ export class ArkheosApi {
   }
 
   async #fetch({ method = "GET", path, body, token, binary = false }) {
-    const allowedDynamic = /^\/v1\/products\/[a-z0-9][a-z0-9-]{0,63}\/releases\/stable$/u.test(path) || /^\/v1\/artifacts\/[a-f0-9]{64}$/u.test(path);
+    const allowedDynamic = /^\/v1\/products\/[a-z0-9][a-z0-9-]{0,63}\/releases\/stable(?:\/[0-9]+(?:\.[0-9]+){2}(?:-[0-9A-Za-z.-]+)?)?$/u.test(path) || /^\/v1\/artifacts\/[a-f0-9]{64}$/u.test(path);
     if (!ALLOWED.has(path) && !allowedDynamic) throw new Error("API path is not admitted");
     const headers = { accept: binary ? "application/octet-stream" : "application/json" };
     if (body !== undefined) headers["content-type"] = "application/json";
@@ -109,11 +114,11 @@ export class ArkheosApi {
     return this.transport({ method: "POST", path: "/v1/billing/portal", token, body: {} });
   }
 
-  async release(product, channel = "stable") {
-    product = safeProduct(product); channel = safeChannel(channel);
+  async release(product, channel = "stable", version) {
+    product = safeProduct(product); channel = safeChannel(channel); version = safeVersion(version);
     const token = await this.#accessToken();
     if (!token) throw new Error("Authorization required");
-    const release = await this.transport({ method: "GET", path: `/v1/products/${product}/releases/${channel}`, token });
+    const release = await this.transport({ method: "GET", path: `/v1/products/${product}/releases/${channel}${version === undefined ? "" : `/${version}`}`, token });
     const verification = verifySignedRecord(release, this.trustedKeys, "arkheos.release/v1", this.now());
     return { release, verification };
   }

@@ -47,7 +47,7 @@ export class ArkheosOperations {
     if (kind === "update" && !current.products[product]) throw new Error("Product is not installed");
     const account = await this.api.accountStatus();
     if (!account.authorized || !account.entitlement?.mutating) throw new Error("Trial, paid, or grace membership is required");
-    const { release, verification } = await this.api.release(product, channel);
+    const { release, verification } = await this.api.release(product, channel, version);
     if (version && release.version !== version) throw new Error("Requested version is not the signed release version");
     const artifact = release.artifacts.find((entry) => entry.platform === this.platform);
     if (!artifact) throw new Error(`No signed artifact for ${this.platform}`);

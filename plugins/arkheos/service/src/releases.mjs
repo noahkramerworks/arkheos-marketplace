@@ -1,8 +1,9 @@
 import { json } from "./domain.mjs";
 
-export async function release(env, product, channel) {
-  if (!/^[a-z0-9][a-z0-9-]{0,63}$/u.test(product) || channel !== "stable") return json({ code: "INVALID_RELEASE" }, 400);
-  const value = await env.CONFIG.get(`release:${product}:${channel}`, "json");
+export async function release(env, product, channel, version = null) {
+  if (!/^[a-z0-9][a-z0-9-]{0,63}$/u.test(product) || channel !== "stable" || (version !== null && !/^[0-9]+(?:\.[0-9]+){2}(?:-[0-9A-Za-z.-]+)?$/u.test(version))) return json({ code: "INVALID_RELEASE" }, 400);
+  const key = version === null ? `release:${product}:${channel}` : `release:${product}:${channel}:${version}`;
+  const value = await env.CONFIG.get(key, "json");
   return value?.schema === "arkheos.release/v1" ? json(value, 200, { "cache-control": "private, max-age=60" }) : json({ code: "RELEASE_UNAVAILABLE" }, 503);
 }
 
