@@ -1,0 +1,37 @@
+{
+  "name": "obs-bridge",
+  "version": "0.1.2",
+  "description": "Native, reversible OBS Studio control for Codex through obs-websocket.",
+  "author": {
+    "name": "Rizek"
+  },
+  "license": "UNLICENSED",
+  "keywords": [
+    "obs",
+    "obs-websocket",
+    "bridge",
+    "streaming",
+    "reversible"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "OBS Bridge",
+    "shortDescription": "Inspect and control OBS with verified rollback",
+    "longDescription": "Inspect OBS Studio through its native WebSocket API, apply narrow scene and input plans, verify every effect by readback, and roll back only bridge-created resources.",
+    "developerName": "Rizek",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Inspect my running OBS Studio instance",
+      "Apply a reversible OBS scene plan",
+      "Roll back an OBS Bridge receipt"
+    ],
+    "brandColor": "#5B5BF7",
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/composer-icon.png"
+  }
+}
