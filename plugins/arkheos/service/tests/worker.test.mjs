@@ -9,6 +9,17 @@ test("health identifies ArkheOS 0.1.0", async () => {
   const response = await route(new Request("https://api.arkheos.ai/health"), env()); assert.equal(response.status, 200); assert.deepEqual(await response.json(), { status: "ok", service: "ArkheOS", version: "0.1.0" });
 });
 
+test("customer account entry routes serve the account application", async () => {
+  const fetched = [];
+  const environment = env();
+  environment.ASSETS = { fetch: async (request) => { fetched.push(new URL(request.url).pathname); return new Response("account", { status: 200 }); } };
+  for (const path of ["/", "/account", "/device?code=ARKHEOS", "/welcome?session_id=example"]) {
+    const response = await route(new Request(`https://account.arkheos.ai${path}`), environment);
+    assert.equal(response.status, 200);
+  }
+  assert.deepEqual(fetched, ["/account.html", "/account.html", "/account.html", "/account.html"]);
+});
+
 test("canonical and legacy webhook paths use the same pre-write signature gate", async () => {
   for (const path of ["/v1/billing/webhook", "/v1/stripe/webhook"]) {
     const response = await route(new Request(`https://api.arkheos.ai${path}`, { method: "POST", headers: { "content-type": "application/json" }, body: "{}" }), env());
