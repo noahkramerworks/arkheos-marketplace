@@ -3,12 +3,18 @@ import assert from "node:assert/strict";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { ArkheosOperations } from "../mcp/core/operations.mjs";
+import { execFileSync } from "node:child_process";
+import { ArkheosOperations, codexExecutable } from "../mcp/core/operations.mjs";
 import { ArkheosState } from "../mcp/core/state.mjs";
 import { sha256 } from "../mcp/core/canonical.mjs";
 
 const dpapi = { protect: (value) => Buffer.from(value).reverse(), unprotect: (value) => Buffer.from(value).reverse() };
 function file(path, value) { const content = Buffer.from(typeof value === "string" ? value : JSON.stringify(value)); return { type: "file", path, content: content.toString("base64"), length: content.length, sha256: sha256(content) }; }
+
+test("the observed Windows Codex executable is directly spawnable without a batch shim", { skip: process.platform !== "win32" }, () => {
+  assert.equal(codexExecutable("win32"), "codex.exe");
+  assert.match(execFileSync(codexExecutable(), ["--version"], { encoding: "utf8", windowsHide: true, timeout: 30000 }), /^codex-cli\s+\d/u);
+});
 
 test("signed product plan materializes a local marketplace, installs, verifies, exports, and removes", async (t) => {
   const root = await mkdtemp(path.join(tmpdir(), "arkheos-lifecycle-")); t.after(() => rm(root, { recursive: true, force: true }));

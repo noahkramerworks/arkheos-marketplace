@@ -8,8 +8,12 @@ function localPlatform() {
   return process.platform === "win32" ? "windows" : process.platform === "darwin" ? "macos" : "linux";
 }
 
+function codexExecutable(platform = process.platform) {
+  return platform === "win32" ? "codex.exe" : "codex";
+}
+
 function defaultCli() {
-  const executable = process.platform === "win32" ? "codex.cmd" : "codex";
+  const executable = codexExecutable();
   const run = (args) => {
     const output = execFileSync(executable, args, { encoding: "utf8", windowsHide: true, timeout: 120000, maxBuffer: 4 * 1024 * 1024 });
     try { return JSON.parse(output); } catch { return { raw: output.trim() }; }
@@ -32,6 +36,8 @@ async function materialize(root, archive) {
   if (registry.name !== "arkheos-products" || !Array.isArray(registry.plugins) || registry.plugins.length !== 1 || registry.plugins[0]?.name !== archive.product) throw new Error("Archive marketplace identity mismatch");
   return registry;
 }
+
+export { codexExecutable };
 
 export class ArkheosOperations {
   constructor({ state, api, cli = defaultCli(), now = () => new Date(), platform = localPlatform() } = {}) {
