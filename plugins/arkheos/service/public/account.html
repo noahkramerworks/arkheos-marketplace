@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ArkheOS Account</title><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script></head>
+<body>
+  <header><a class="brand" href="https://arkheos.ai/">ARKHEOS</a><span>Account</span></header>
+  <main class="account">
+    <p class="eyebrow">VERIFIED ACCOUNT</p>
+    <h1>Authorize this Codex installation</h1>
+    <p>Enter the code shown by ArkheOS in Codex. Your account token is delivered directly to the local plugin and never appears in chat.</p>
+    <form id="device-form"><label for="device-code">Device code</label><input id="device-code" name="code" autocomplete="one-time-code" maxlength="12" required><button class="primary" type="submit">Authorize</button></form>
+    <p id="status" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>

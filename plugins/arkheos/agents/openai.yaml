@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArkheOS"
+  short_description: "Install and recover signed ArkheOS products."
+  default_prompt: "Use the focused Skill that owns this request."

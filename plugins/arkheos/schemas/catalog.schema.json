@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.arkheos.ai/schemas/catalog.json",
+  "title": "ArkheOS signed catalog",
+  "type": "object",
+  "required": ["schema", "revision", "issuedAt", "expiresAt", "products", "signature"],
+  "properties": {
+    "schema": {"const": "arkheos.catalog/v1"},
+    "revision": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "issuedAt": {"type": "string", "format": "date-time"},
+    "expiresAt": {"type": "string", "format": "date-time"},
+    "products": {"type": "array", "items": {"type": "object", "required": ["id", "name", "channel", "version", "platforms", "dependencies", "membershipRequired"], "properties": {"id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,63}$"}, "name": {"type": "string", "minLength": 1, "maxLength": 100}, "channel": {"enum": ["stable"]}, "version": {"type": "string"}, "platforms": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["windows", "macos", "linux"]}}, "dependencies": {"type": "array", "items": {"type": "string"}}, "membershipRequired": {"type": "boolean"}}, "additionalProperties": false}},
+    "signature": {"type": "object", "required": ["algorithm", "keyId", "value"], "properties": {"algorithm": {"const": "Ed25519"}, "keyId": {"type": "string"}, "value": {"type": "string"}}, "additionalProperties": false}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ArkheOS local receipt",
+  "type": "object",
+  "required": ["schema", "id", "operation", "product", "status", "stages", "createdAt"],
+  "properties": {"schema": {"const": "arkheos.receipt/v1"}, "id": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "operation": {"type": "string"}, "product": {"type": "string"}, "status": {"enum": ["verified", "partial", "failed", "rolled-back", "removed", "exported"]}, "stages": {"type": "array", "items": {"type": "object"}}, "createdAt": {"type": "string", "format": "date-time"}},
+  "additionalProperties": true
+}

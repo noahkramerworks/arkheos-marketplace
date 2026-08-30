@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ArkheOS local state",
+  "type": "object",
+  "required": ["schema", "identity", "installations"],
+  "properties": {"schema": {"const": "arkheos.state/v1"}, "identity": {"type": "object"}, "installations": {"type": "object"}},
+  "additionalProperties": false
+}

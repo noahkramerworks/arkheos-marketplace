@@ -1,0 +1,20 @@
+{
+  "name": "arkheos",
+  "version": "0.1.0",
+  "description": "Customer account, membership, signed product delivery, updates, and recovery for ArkheOS.",
+  "author": {
+    "name": "Rizek"
+  },
+  "license": "UNLICENSED",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "ArkheOS",
+    "shortDescription": "Install and recover signed ArkheOS products.",
+    "developerName": "Rizek",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/composer-icon.png"
+  }
+}

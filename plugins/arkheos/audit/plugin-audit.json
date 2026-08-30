@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "target": "C:\\Users\\rizek\\plugins\\arkheos",
+  "design": "C:\\Users\\rizek\\plugins\\arkheos\\design\\plugin.md",
+  "audited_at": "2026-08-30T16:11:19.935Z",
+  "checks": [
+    {
+      "name": "personal-interface-assets",
+      "status": "passed",
+      "detail": "Manifest and deterministic PNG assets match personal-png-v1"
+    },
+    {
+      "name": "instruction-graph",
+      "status": "passed",
+      "detail": "9 Markdown files and 3 linked files inspected"
+    },
+    {
+      "name": "mcp-declaration",
+      "status": "passed",
+      "detail": "1 MCP server declarations inspected"
+    },
+    {
+      "name": "nonempty-contained-source",
+      "status": "passed",
+      "detail": "Package files are nonempty and contained"
+    },
+    {
+      "name": "negative-tests",
+      "status": "passed",
+      "detail": "6 test files include negative/failure assertions"
+    },
+    {
+      "name": "fresh-task-continuity",
+      "status": "passed",
+      "detail": "Root recovery entrypoint inspected"
+    },
+    {
+      "name": "positive-prompts",
+      "status": "passed",
+      "detail": "2026-08-30 selected behavioral run passed: catalog_inspect returned only the selected Stream Showrunner catalog record, account_status returned the bounded recovery view, and the signed lifecycle test installed 1.0.0, updated to 1.1.0, restored retained 1.0.0 bytes, verified, exported, and removed the managed product."
+    },
+    {
+      "name": "negative-prompts",
+      "status": "passed",
+      "detail": "2026-08-30 selected behavioral run passed: an unadmitted weekly billing plan and unknown shell_execute tool were rejected; traversal, link, duplicate, and missing marketplace archive shapes were rejected; invalid canonical and legacy webhook signatures returned 400 before any DB access."
+    },
+    {
+      "name": "missing-context",
+      "status": "passed",
+      "detail": "2026-08-30 selected behavioral run passed: absent local authorization produced authorized=false, mode=recovery, mutating=false, while trial activation stopped with Authorization required and did not call transport."
+    },
+    {
+      "name": "failure-prompts",
+      "status": "passed",
+      "detail": "2026-08-30 selected behavioral run passed: a simulated Codex plugin-add failure produced a failed receipt, removed uncertain plugin effects, restored empty installation pre-state, and secret-shaped upstream errors were redacted; token-family replay/revocation and Stripe event deduplication checks also passed."
+    }
+  ],
+  "findings": [],
+  "final_result": "passed"
+}

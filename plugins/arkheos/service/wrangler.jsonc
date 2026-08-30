@@ -1,0 +1,28 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "fixed-production",
+  "main": "src/index.mjs",
+  "compatibility_date": "2026-08-21",
+  "compatibility_flags": ["nodejs_compat"],
+  "account_id": "f0ee1841a668855254da7c8147b43684",
+  "workers_dev": true,
+  "observability": {"enabled": true, "head_sampling_rate": 1},
+  "routes": [
+    {"pattern": "arkheos.ai", "custom_domain": true},
+    {"pattern": "www.arkheos.ai", "custom_domain": true},
+    {"pattern": "api.arkheos.ai", "custom_domain": true},
+    {"pattern": "account.arkheos.ai", "custom_domain": true}
+  ],
+  "vars": {
+    "ENVIRONMENT": "production",
+    "PUBLIC_ORIGIN": "https://api.arkheos.ai",
+    "ACCOUNT_ORIGIN": "https://account.arkheos.ai",
+    "SITE_ORIGIN": "https://arkheos.ai",
+    "STRIPE_MONTHLY_PRICE_ID": "price_1UABOWKGTRdYPs9HY0gkOaMd",
+    "STRIPE_ANNUAL_PRICE_ID": "price_1UABQnKGTRdYPs9HE99rX0zz"
+  },
+  "d1_databases": [{"binding": "DB", "database_name": "fixed-production", "database_id": "cfbd62f2-5272-43c6-ad41-4d3da227d962", "migrations_dir": "migrations"}],
+  "kv_namespaces": [{"binding": "CONFIG", "id": "d5fc4babe02647d2abefce35c4f35922"}],
+  "r2_buckets": [{"binding": "ARTIFACTS", "bucket_name": "fixed-artifacts"}],
+  "assets": {"binding": "ASSETS", "directory": "public", "run_worker_first": ["/v1/*", "/oauth/*", "/.well-known/*", "/health"]}
+}

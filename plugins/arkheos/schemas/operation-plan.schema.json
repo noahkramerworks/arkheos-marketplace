@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ArkheOS local operation plan",
+  "type": "object",
+  "required": ["schema", "id", "kind", "product", "targetVersion", "releaseDigest", "preStateDigest", "createdAt", "expiresAt", "used", "rollback"],
+  "properties": {
+    "schema": {"const": "arkheos.operation-plan/v1"}, "id": {"type": "string"}, "kind": {"enum": ["install", "update"]}, "product": {"type": "string"}, "targetVersion": {"type": "string"}, "releaseDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "preStateDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "createdAt": {"type": "string", "format": "date-time"}, "expiresAt": {"type": "string", "format": "date-time"}, "used": {"type": "boolean"}, "rollback": {"type": "object"}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,15 @@
+{
+  "name": "arkheos",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Customer account, membership, signed product delivery, updates, and recovery for ArkheOS.",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs service/tests/*.test.mjs",
+    "verify": "node scripts/verify-package.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "UNLICENSED"
+}

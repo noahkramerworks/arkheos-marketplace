@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ArkheOS entitlement",
+  "type": "object",
+  "required": ["schema", "mode", "mutating", "preserved", "evaluatedAt"],
+  "properties": {
+    "schema": {"const": "arkheos.entitlement/v1"},
+    "mode": {"enum": ["trial", "paid", "grace", "recovery"]},
+    "mutating": {"type": "boolean"},
+    "trialEndsAt": {"type": ["string", "null"], "format": "date-time"},
+    "paidThrough": {"type": ["string", "null"], "format": "date-time"},
+    "graceThrough": {"type": ["string", "null"], "format": "date-time"},
+    "preserved": {"type": "array", "items": {"type": "string"}},
+    "evaluatedAt": {"type": "string", "format": "date-time"}
+  },
+  "additionalProperties": false
+}
