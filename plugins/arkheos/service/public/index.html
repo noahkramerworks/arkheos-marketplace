@@ -3,29 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ArkheOS — Agent-operated software, delivered safely</title>
-  <meta name="description" content="Try, install, update, and recover signed ArkheOS products through Codex.">
+  <title>Stream Showrunner — Build your stream with Codex</title>
+  <meta name="description" content="Install Stream Showrunner through ArkheOS and let Codex prepare a reversible OBS creator baseline. Try it free for seven days.">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <header><a class="brand" href="/">ARKHEOS</a><a href="https://account.arkheos.ai/">Account</a></header>
+  <header>
+    <a class="brand" href="/">ARKHEOS</a>
+    <nav aria-label="Primary navigation"><a href="#product">Product</a><a href="#install">Install</a><a href="#membership">Pricing</a><a href="https://account.arkheos.ai/">Account</a></nav>
+  </header>
   <main>
     <section class="hero">
-      <p class="eyebrow">SOFTWARE FOR AGENTS</p>
-      <h1>Products Codex can install, verify, and undo.</h1>
-      <p>ArkheOS delivers signed customer products through a reversible, evidence-backed lifecycle. Your project content stays local.</p>
-      <div class="actions"><a class="primary" href="https://account.arkheos.ai/">Start the 7-day no-card trial</a><a href="#membership">View membership</a></div>
+      <p class="eyebrow">NOW AVAILABLE — STREAM SHOWRUNNER</p>
+      <h1>Build your stream with Codex. Undo it with confidence.</h1>
+      <p class="lede">Stream Showrunner prepares a reversible OBS creator baseline, checks the studio before it changes anything, and keeps exact receipts for undo.</p>
+      <div class="actions"><a class="primary" href="#install">Install the free bootstrap</a><a class="secondary" href="#product">See what it does</a></div>
+      <p class="terms">7-day no-card trial <span>·</span> $10 monthly <span>·</span> $99 annually</p>
     </section>
-    <section class="grid" aria-label="ArkheOS guarantees">
-      <article><h2>Signed delivery</h2><p>Every release is content-addressed and verified before installation.</p></article>
-      <article><h2>Native boundaries</h2><p>Products compose free application bridges that own real effects and rollback.</p></article>
-      <article><h2>Recovery survives</h2><p>Inspection, export, verification, recovery, removal, and undo remain after membership.</p></article>
+
+    <section id="product" class="showcase">
+      <div>
+        <p class="eyebrow">ONE CLEAR JOB</p>
+        <h2>Your OBS baseline, handled.</h2>
+        <p>Ask Codex to inspect your studio, apply the admitted Stream Showrunner setup, and verify the result. Your scenes and sources stay local.</p>
+      </div>
+      <div class="grid" aria-label="Stream Showrunner capabilities">
+        <article><span class="number">01</span><h3>Preflight first</h3><p>Checks OBS, the free bridge, and the exact project state before setup.</p></article>
+        <article><span class="number">02</span><h3>Reversible setup</h3><p>Applies a bounded creator baseline through typed OBS operations.</p></article>
+        <article><span class="number">03</span><h3>Receipts and undo</h3><p>Records what changed and can roll back the exact resources it created.</p></article>
+      </div>
     </section>
+
+    <section id="install" class="install">
+      <div class="section-heading"><p class="eyebrow">THREE STEPS</p><h2>Install the free infrastructure.</h2><p>Run these commands once, then let ArkheOS guide authorization, trial activation, and signed product installation inside Codex.</p></div>
+      <ol class="steps">
+        <li><div><span>1</span><h3>Add the marketplace</h3></div><pre><code>codex plugin marketplace add noahkramerworks/arkheos-marketplace --ref main</code></pre></li>
+        <li><div><span>2</span><h3>Install ArkheOS and OBS Bridge</h3></div><pre><code>codex plugin add arkheos@arkheos
+codex plugin add obs-bridge@arkheos</code></pre></li>
+        <li><div><span>3</span><h3>Tell Codex what you want</h3></div><pre><code>@ArkheOS authorize my account, start my trial, and install Stream Showrunner</code></pre></li>
+      </ol>
+      <p class="install-note">The bootstrap and OBS Bridge are free. Paid product archives are signed, content-addressed, and delivered only after ArkheOS verifies membership.</p>
+    </section>
+
     <section id="membership" class="membership">
-      <div><p class="eyebrow">ONE MEMBERSHIP</p><h2>$10 monthly or $99 annually</h2><p>Includes a one-time seven-day no-card trial. Cancelled access continues through the paid period plus 30 days.</p></div>
-      <a class="primary" href="https://account.arkheos.ai/">Open account</a>
+      <div><p class="eyebrow">SIMPLE MEMBERSHIP</p><h2>$10 monthly or $99 annually</h2><p>Start with one verified seven-day no-card trial. Cancelled access continues through the paid period plus 30 days; verification, recovery, removal, and undo remain afterward.</p></div>
+      <a class="primary" href="#install">Start with installation</a>
     </section>
   </main>
-  <footer><a href="mailto:support@arkheos.ai">Support</a><span>Privacy and terms remain available on the current production site until reviewed ArkheOS replacements are promoted.</span></footer>
+  <footer><a class="brand" href="/">ARKHEOS</a><span>Agent-operated software, delivered safely.</span><a href="mailto:support@arkheos.ai">support@arkheos.ai</a><a href="https://github.com/noahkramerworks/arkheos-marketplace">GitHub</a></footer>
 </body>
 </html>

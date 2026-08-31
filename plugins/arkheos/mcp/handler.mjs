@@ -46,7 +46,7 @@ export function createMcpHandler({ state, api, operations } = {}) {
   api ||= new ArkheosApi({ state, trustedKeys });
   operations ||= new ArkheosOperations({ state, api });
   return async function handle(request) {
-    if (request.method === "initialize") return { protocolVersion: "2025-06-18", capabilities: { tools: { listChanged: false } }, serverInfo: { name: "arkheos", version: "0.1.1" } };
+    if (request.method === "initialize") return { protocolVersion: "2025-06-18", capabilities: { tools: { listChanged: false } }, serverInfo: { name: "arkheos", version: "0.1.2" } };
     if (request.method === "ping") return {};
     if (request.method === "tools/list") return { tools };
     if (request.method !== "tools/call") throw Object.assign(new Error("Method not found"), { rpc: { code: -32601, message: "Method not found" } });

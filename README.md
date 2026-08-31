@@ -1,10 +1,10 @@
-# ArkheOS Marketplace
+# Stream Showrunner by ArkheOS
 
-This repository distributes the free ArkheOS customer bootstrap and the certified free OBS Bridge infrastructure required by Stream Showrunner. ArkheOS provides account authorization, membership status, signed catalog verification, entitlement-gated product delivery, updates, and recovery. OBS Bridge owns typed native OBS inspection, reversible effects, receipts, and rollback.
+Build your stream with Codex and undo it with confidence. Stream Showrunner prepares a reversible OBS creator baseline, checks the studio before changing it, and keeps exact receipts for rollback.
 
-Paid product archives are not stored in this repository. They are delivered as signed, content-addressed artifacts through `api.arkheos.ai` after ArkheOS verifies the customer's entitlement.
+Start with a one-time seven-day no-card trial. ArkheOS membership is $10/month or $99/year. The ArkheOS bootstrap and certified OBS Bridge infrastructure are free.
 
-## Install the free infrastructure
+## Install
 
 ```text
 codex plugin marketplace add noahkramerworks/arkheos-marketplace --ref main
@@ -12,6 +12,19 @@ codex plugin add arkheos@arkheos
 codex plugin add obs-bridge@arkheos
 ```
 
-The source is visible for installation and security inspection, but it is proprietary and all rights are reserved. See [LICENSE](LICENSE). OBS Bridge publication is gated by Bridge Runtime certificate `sha256:e1dc85a39ffb6ace1c1d25bc5aaf34423a1b34b6ffc1412874d4156b955ccfc4`. The signed public catalog snapshot is available at [`catalog/current.json`](catalog/current.json); the runtime source of truth remains `https://api.arkheos.ai/v1/catalog`.
+Then tell Codex:
 
-Stream Showrunner is available to ArkheOS members for $10/month or $99/year, including a one-time seven-day no-card trial. OBS Bridge remains free infrastructure.
+```text
+@ArkheOS authorize my account, start my trial, and install Stream Showrunner
+```
+
+## What stays safe
+
+- Your OBS project and creator content stay local.
+- Product releases are signed and content-addressed before installation.
+- OBS changes go through typed bridge operations with receipts and exact rollback.
+- Verification, recovery, removal, and undo remain available after paid access ends.
+
+Paid product archives are not stored in this repository. ArkheOS delivers them through `api.arkheos.ai` only after entitlement verification. The source here remains visible for installation and security inspection but is proprietary; see [LICENSE](LICENSE).
+
+Visit [arkheos.ai](https://arkheos.ai/) or email [support@arkheos.ai](mailto:support@arkheos.ai).

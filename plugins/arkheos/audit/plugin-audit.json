@@ -2,7 +2,7 @@
   "schema_version": 2,
   "target": "C:\\Users\\rizek\\plugins\\arkheos",
   "design": "C:\\Users\\rizek\\plugins\\arkheos\\design\\plugin.md",
-  "audited_at": "2026-08-31T16:12:09.387Z",
+  "audited_at": "2026-08-31T16:41:12.914Z",
   "checks": [
     {
       "name": "personal-interface-assets",
@@ -37,22 +37,22 @@
     {
       "name": "positive-prompts",
       "status": "passed",
-      "detail": "2026-08-31 ArkheOS 0.1.1 full 27-test package run and separate 12-test service run passed. Catalog, recovery account status, signed install, update, rollback, export, removal, and the deployed account-host route repair all returned their bounded expected results."
+      "detail": "2026-08-31 ArkheOS 0.1.2 full 28-test package run and separate 13-test service run passed. The sales page presents Stream Showrunner, the exact free marketplace and bridge commands, the natural-language Codex handoff, verified pricing, and the no-card trial while catalog, account, signed lifecycle, update, rollback, export, and removal behavior remain passing."
     },
     {
       "name": "negative-prompts",
       "status": "passed",
-      "detail": "The same runs rejected unknown tools, unadmitted billing plans, unsafe archive shapes, invalid canonical and legacy webhook signatures, and invalid exact release versions. The routing regression fails if any admitted account entry path requests explicit /account.html instead of extensionless /account."
+      "detail": "The same runs rejected unknown tools, unadmitted billing plans, unsafe archive shapes, invalid webhook signatures, invalid exact release versions, and any sales-page regression that restores a primary Start action linking an uninstalled visitor directly to the account device-code form."
     },
     {
       "name": "missing-context",
       "status": "passed",
-      "detail": "Without local authorization, account status remained recovery-only and paid mutation refused with Authorization required; no remote transport call was attempted."
+      "detail": "Without local authorization, account status remains recovery-only and paid mutation refuses without making a remote transport call. The public sales page begins with installation and does not assume an existing device code or account session."
     },
     {
       "name": "failure-prompts",
       "status": "passed",
-      "detail": "The full run retained honest cleanup after simulated Codex installation failure, single-use plan enforcement, secret-shaped error redaction, token-family revocation checks, Stripe event deduplication, stale signature rejection, and simulated Cloudflare Static Assets 307 behavior for explicit .html requests."
+      "detail": "The full run retained honest cleanup after simulated Codex installation failure, single-use plan enforcement, secret-shaped error redaction, token-family revocation checks, Stripe event deduplication, stale signature rejection, and the account Static Assets redirect regression guard."
     }
   ],
   "findings": [],

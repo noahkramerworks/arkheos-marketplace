@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse(readFileSync(path.join(root, ".codex-plugin", "plugin.json"), "utf8"));
-assert.equal(manifest.name, "arkheos"); assert.equal(manifest.version, "0.1.1"); assert.equal(manifest.skills, "./skills/"); assert.equal(manifest.mcpServers, "./.mcp.json");
+assert.equal(manifest.name, "arkheos"); assert.equal(manifest.version, "0.1.2"); assert.equal(manifest.skills, "./skills/"); assert.equal(manifest.mcpServers, "./.mcp.json");
 assert.equal(manifest.interface.logo, "./assets/logo.png"); assert.equal(manifest.interface.composerIcon, "./assets/composer-icon.png");
 const design = readFileSync(path.join(root, "design", "plugin.md"), "utf8");
 assert.match(design, /status: accepted/u); assert.match(design, /open_questions: \[\]/u); assert.match(design, /mcp_disposition: bundled-server/u);
@@ -28,7 +28,7 @@ const required = [
   "scripts/arkheos.mjs", "scripts/verify-package.mjs", "service/package.json", "service/package-lock.json", "service/wrangler.jsonc",
   "service/migrations/0001_initial.sql", "service/migrations/0002_arkheos_membership.sql", "service/public/account.html", "service/public/app.js", "service/public/index.html", "service/public/styles.css",
   "service/src/catalog.mjs", "service/src/domain.mjs", "service/src/index.mjs", "service/src/oauth.mjs", "service/src/releases.mjs", "service/src/stripe.mjs",
-  "service/tests/domain.test.mjs", "service/tests/migrations.test.mjs", "service/tests/oauth.test.mjs", "service/tests/projection.test.mjs", "service/tests/releases.test.mjs", "service/tests/worker.test.mjs",
+  "service/tests/domain.test.mjs", "service/tests/landing.test.mjs", "service/tests/migrations.test.mjs", "service/tests/oauth.test.mjs", "service/tests/projection.test.mjs", "service/tests/releases.test.mjs", "service/tests/worker.test.mjs",
   "templates/catalog.json", "tests/audit-prompts.test.mjs", "tests/handler.test.mjs", "tests/lifecycle.test.mjs", "tests/package.test.mjs", "tests/security.test.mjs", "tests/state.test.mjs"
 ];
 for (const relative of required) assert.ok(existsSync(path.join(root, relative)), `Missing ${relative}`);

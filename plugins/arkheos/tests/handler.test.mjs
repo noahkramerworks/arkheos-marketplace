@@ -11,7 +11,7 @@ test("initialize and bounded account status work through injected adapters", asy
   const api = { accountStatus: async () => ({ authorized: false, entitlement: { mode: "recovery", mutating: false } }) };
   const state = { receiptList: async () => [], receipt: async () => null };
   const handler = createMcpHandler({ state, api, operations: {} });
-  const init = await handler({ method: "initialize" }); assert.deepEqual(init.serverInfo, { name: "arkheos", version: "0.1.1" });
+  const init = await handler({ method: "initialize" }); assert.deepEqual(init.serverInfo, { name: "arkheos", version: "0.1.2" });
   const response = await handler({ method: "tools/call", params: { name: "account_status", arguments: {} } });
   assert.equal(response.structuredContent.entitlement.mode, "recovery"); assert.equal(response.isError, undefined);
 });
