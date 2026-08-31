@@ -24,5 +24,5 @@
   "d1_databases": [{"binding": "DB", "database_name": "fixed-production", "database_id": "cfbd62f2-5272-43c6-ad41-4d3da227d962", "migrations_dir": "migrations"}],
   "kv_namespaces": [{"binding": "CONFIG", "id": "d5fc4babe02647d2abefce35c4f35922"}],
   "r2_buckets": [{"binding": "ARTIFACTS", "bucket_name": "fixed-artifacts"}],
-  "assets": {"binding": "ASSETS", "directory": "public", "run_worker_first": ["/v1/*", "/oauth/*", "/.well-known/*", "/health"]}
+  "assets": {"binding": "ASSETS", "directory": "public", "run_worker_first": ["/v1/*", "/oauth/*", "/.well-known/*", "/health", "/account*", "/device*", "/welcome*"]}
 }

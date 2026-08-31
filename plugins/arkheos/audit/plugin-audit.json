@@ -2,7 +2,7 @@
   "schema_version": 2,
   "target": "C:\\Users\\rizek\\plugins\\arkheos",
   "design": "C:\\Users\\rizek\\plugins\\arkheos\\design\\plugin.md",
-  "audited_at": "2026-08-30T20:08:29.151Z",
+  "audited_at": "2026-08-31T16:12:09.387Z",
   "checks": [
     {
       "name": "personal-interface-assets",
@@ -37,22 +37,22 @@
     {
       "name": "positive-prompts",
       "status": "passed",
-      "detail": "2026-08-30 selected behavioral run passed: catalog_inspect returned only the selected Stream Showrunner catalog record, account_status returned the bounded recovery view, and the signed lifecycle test installed 1.0.0, updated to 1.1.0, restored retained 1.0.0 bytes, verified, exported, and removed the managed product."
+      "detail": "2026-08-31 ArkheOS 0.1.1 full 27-test package run and separate 12-test service run passed. Catalog, recovery account status, signed install, update, rollback, export, removal, and the deployed account-host route repair all returned their bounded expected results."
     },
     {
       "name": "negative-prompts",
       "status": "passed",
-      "detail": "2026-08-30 selected behavioral run passed: an unadmitted weekly billing plan and unknown shell_execute tool were rejected; traversal, link, duplicate, and missing marketplace archive shapes were rejected; invalid canonical and legacy webhook signatures returned 400 before any DB access."
+      "detail": "The same runs rejected unknown tools, unadmitted billing plans, unsafe archive shapes, invalid canonical and legacy webhook signatures, and invalid exact release versions. The routing regression fails if any admitted account entry path requests explicit /account.html instead of extensionless /account."
     },
     {
       "name": "missing-context",
       "status": "passed",
-      "detail": "2026-08-30 selected behavioral run passed: absent local authorization produced authorized=false, mode=recovery, mutating=false, while trial activation stopped with Authorization required and did not call transport."
+      "detail": "Without local authorization, account status remained recovery-only and paid mutation refused with Authorization required; no remote transport call was attempted."
     },
     {
       "name": "failure-prompts",
       "status": "passed",
-      "detail": "2026-08-30 selected behavioral run passed: a simulated Codex plugin-add failure produced a failed receipt, removed uncertain plugin effects, restored empty installation pre-state, and secret-shaped upstream errors were redacted; token-family replay/revocation and Stripe event deduplication checks also passed."
+      "detail": "The full run retained honest cleanup after simulated Codex installation failure, single-use plan enforcement, secret-shaped error redaction, token-family revocation checks, Stripe event deduplication, stale signature rejection, and simulated Cloudflare Static Assets 307 behavior for explicit .html requests."
     }
   ],
   "findings": [],

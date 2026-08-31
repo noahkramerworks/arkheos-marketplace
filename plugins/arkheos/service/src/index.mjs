@@ -90,7 +90,7 @@ async function route(request, env) {
   if (releaseMatch && request.method === "GET") { const member = await requirePrincipal(request, env); return member ? release(env, releaseMatch[1], releaseMatch[2], releaseMatch[3] || null) : json({ code: "AUTHORIZATION_REQUIRED" }, 401); }
   const artifactMatch = path.match(/^\/v1\/artifacts\/([a-f0-9]{64})$/u);
   if (artifactMatch && request.method === "GET") { const member = await requirePrincipal(request, env); return member ? artifact(request, env, artifactMatch[1], await membership(env, member.customer_id)) : json({ code: "AUTHORIZATION_REQUIRED" }, 401); }
-  if (request.method === "GET" && url.hostname === "account.arkheos.ai" && new Set(["/", "/account", "/device", "/welcome"]).has(path)) return env.ASSETS.fetch(new Request(new URL("/account.html", request.url), request));
+  if (request.method === "GET" && url.hostname === "account.arkheos.ai" && new Set(["/", "/account", "/device", "/welcome"]).has(path)) return env.ASSETS.fetch(new Request(new URL("/account", request.url), request));
   return env.ASSETS.fetch(request);
 }
 
