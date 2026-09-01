@@ -6,7 +6,7 @@ import path from "node:path";
 import { applyTransaction, rollbackReceipt, setupBridge } from "../mcp/operations.mjs";
 import { sha256 } from "../mcp/state.mjs";
 
-const identity = { ok: true, applicationVersion: "4.2.0", applicationName: "4.2.0-Belém do Pará", versionInt: 40200, bridgeVersion: "0.1.0", apiVersion: "PyQGIS 4.2.0 / 40200" };
+const identity = { ok: true, applicationVersion: "4.2.0", applicationName: "4.2.0-Belém do Pará", versionInt: 40200, bridgeVersion: "0.1.1", apiVersion: "PyQGIS 4.2.0 / 40200" };
 test("sealed transaction receipt restores exact project bytes", async () => {
   const temp = mkdtempSync(path.join(os.tmpdir(), "qgis-workflow-")); const stateRoot = path.join(temp, "state"); const projectPath = path.join(temp, "fixture.qgs"); const pre = Buffer.from("qgis-pre"); writeFileSync(projectPath, pre);
   let phase = "before"; const revision = (name) => `sha256:${sha256(Buffer.from(name))}`;
@@ -22,4 +22,3 @@ test("sealed transaction receipt restores exact project bytes", async () => {
     const rolled = await rollbackReceipt({ receiptId: applied.receiptId }, runtime); assert.equal(rolled.exactBytes, true); assert.equal(sha256(readFileSync(projectPath)), sha256(pre));
   } finally { rmSync(temp, { recursive: true, force: true }); }
 });
-

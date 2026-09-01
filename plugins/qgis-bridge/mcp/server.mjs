@@ -22,7 +22,7 @@ function error(id, code, message) { return { jsonrpc: "2.0", id: id ?? null, err
 export async function handleRpc(message, options = defaultRuntime) {
   if (!message || message.jsonrpc !== "2.0" || typeof message.method !== "string") return error(message?.id, -32600, "Invalid Request");
   if (message.method.startsWith("notifications/")) return null;
-  if (message.method === "initialize") return { jsonrpc: "2.0", id: message.id, result: { protocolVersion: message.params?.protocolVersion || "2025-06-18", capabilities: { tools: {} }, serverInfo: { name: "qgis-bridge", title: "QGIS Bridge", version: "0.1.0" } } };
+  if (message.method === "initialize") return { jsonrpc: "2.0", id: message.id, result: { protocolVersion: message.params?.protocolVersion || "2025-06-18", capabilities: { tools: {} }, serverInfo: { name: "qgis-bridge", title: "QGIS Bridge", version: "0.1.1" } } };
   if (message.method === "ping") return { jsonrpc: "2.0", id: message.id, result: {} };
   if (message.method === "tools/list") return { jsonrpc: "2.0", id: message.id, result: { tools: TOOLS } };
   if (message.method !== "tools/call") return error(message.id, -32601, "Method not found");

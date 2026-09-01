@@ -1,6 +1,6 @@
 {
   "name": "qgis-bridge-personal",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "GPL-3.0-or-later",
   "private": true,
   "type": "module",
@@ -11,4 +11,3 @@
     "test:live": "node --test tests/live-native.test.mjs"
   }
 }
-

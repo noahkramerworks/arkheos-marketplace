@@ -16,7 +16,7 @@ open_questions: []
 
 # Intent and non-goals
 
-Build `qgis-bridge` 0.1.0 as the source-owned, free application boundary between Codex and QGIS 4.2.0. The primary operator is Codex. The bridge contributes exactly seven focused Skills and six closed semantic tools for status, setup, bounded project inspection, revision-guarded layer transactions, deterministic layout export, and receipt rollback. Its one admitted control surface is the documented QGIS 4.2.0 PyQGIS API exposed through a bridge-owned authenticated reverse-polling extension on the QGIS main thread. Non-goals are arbitrary Python, processing-expression passthrough, SQL passthrough, provider credentials, raw RPC, shell execution, unrestricted paths, UI automation, screen scraping, controller emulation, remote services, or support for a different QGIS version.
+QGIS Bridge 0.1.1 preserves the accepted source-owned 0.1.0 application boundary between Codex and QGIS 4.2.0 and repairs only its public license package: the invalid stub is replaced by the complete GNU GPL version 3 terms and package validation now rejects incomplete license text. The primary operator is Codex. The bridge contributes exactly seven focused Skills and six closed semantic tools for status, setup, bounded project inspection, revision-guarded layer transactions, deterministic layout export, and receipt rollback. Its one admitted control surface is the documented QGIS 4.2.0 PyQGIS API exposed through a bridge-owned authenticated reverse-polling extension on the QGIS main thread. Non-goals are arbitrary Python, processing-expression passthrough, SQL passthrough, provider credentials, raw RPC, shell execution, unrestricted paths, UI automation, screen scraping, controller emulation, remote services, or support for a different QGIS version.
 
 The one defensible adapter is `reverse-polling-extension`. Typed reads are application/API identity, active project path/digest, dirty state, layer inventory, renderer summary, layout inventory, CRS, and revision. Typed writes are add a bridge-owned GeoJSON layer, set a closed single-symbol color/width, rename a bridge-owned layer, create/update one bridge-owned print layout, and remove a bridge-owned layer. Independent readback re-queries `QgsProject`, its layer tree and renderer through a separate poll response and verifies the saved `.qgz` digest. Exact rollback restores a sealed pre-project checkpoint, removes only bridge-owned generated files, reloads, and re-reads the native state.
 
@@ -53,7 +53,7 @@ The isolated native canary launches QGIS 4.2.0 with a fresh dedicated profile an
 
 - Profile/admission tests bind QGIS 4.2.0 PyQGIS and reject every weak or missing admission property.
 - Tool/protocol negatives reject unauthenticated polling, raw code/command/SQL/expression/payload fields, traversal, unowned paths/layers, stale revisions, dirty projects, identity drift, and extra properties.
-- Package validation proves GPL-3.0-or-later identity, seven Skills, six tools, complete references/assets, accepted design, and template provenance.
+- Package validation proves complete GPLv3 license terms and GPL-3.0-or-later identity, seven Skills, six tools, complete references/assets, accepted design, and template provenance.
 - Fixture tests prove receipt ownership, independent native-style observation, and byte-exact rollback.
 - Native canary proves add/style/layout/render through real PyQGIS 4.2.0 plus exact restoration.
 - Hardened schema-v2 audit passes with zero findings on a clean commit.

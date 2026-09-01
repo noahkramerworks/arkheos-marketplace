@@ -26,10 +26,10 @@ from qgis.core import (
 )
 
 PROTOCOL = "qgis-bridge/1"
-BRIDGE_VERSION = "0.1.0"
+BRIDGE_VERSION = "0.1.1"
 APPLICATION_VERSION = "4.2.0"
 API_VERSION = "PyQGIS 4.2.0 / 40200"
-OWNERSHIP = "qgis-bridge/0.1.0"
+OWNERSHIP = "qgis-bridge/0.1.0"  # Stable v1 ownership marker across patch releases.
 
 
 def _sha_file(filename):

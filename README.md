@@ -17,7 +17,7 @@ codex plugin marketplace add noahkramerworks/arkheos-marketplace --ref main
 | OBS 0.2.1 | OBS 32.2.1 WebSocket protocol | Inspect, apply, verify, and undo a studio scene plan. | `codex plugin add obs-bridge@arkheos` | Apache-2.0 |
 | REAPER 0.2.0 | REAPER 7.79 native extension | Inspect, edit, render, and restore a saved project. | `codex plugin add reaper-bridge@arkheos` | Apache-2.0 |
 | KiCad 0.1.0 | KiCad 10.0.5 IPC API | Inspect, change, render, and exactly restore a PCB. | `codex plugin add kicad-bridge@arkheos` | Apache-2.0 |
-| QGIS 0.1.0 | QGIS 4.2.0 PyQGIS API | Add and style a layer, render a layout, and restore the project. | `codex plugin add qgis-bridge@arkheos` | GPL-3.0-or-later |
+| QGIS 0.1.1 | QGIS 4.2.0 PyQGIS API | Add and style a layer, render a layout, and restore the project. | `codex plugin add qgis-bridge@arkheos` | GPL-3.0-or-later |
 | FreeCAD 0.1.0 | FreeCAD 1.1.3 Python/library API | Change a parametric feature, export STEP/STL, and restore it. | `codex plugin add freecad-bridge@arkheos` | Apache-2.0 |
 | Krita 0.1.0 | Krita 5.3.3 PyKrita API | Create and transform a layer, export PNG, and restore the document. | `codex plugin add krita-bridge@arkheos` | GPL-3.0-or-later |
 

@@ -1,7 +1,7 @@
 {
   "schema": "bridge-profile/v1.2",
   "bridgeId": "qgis-bridge",
-  "pluginVersion": "0.1.0",
+  "pluginVersion": "0.1.1",
   "application": {
     "name": "QGIS 4.2.0",
     "authority": ["QGIS 4.2.0-Belém do Pará", "QGIS_VERSION_INT 40200"],
@@ -36,7 +36,7 @@
   "sourceRoot": "C:\\Users\\rizek\\plugins\\qgis-bridge",
   "sourceProvenance": {"vcs":"git","requireClean":true,"digestPolicy":"bridge-source/v1"},
   "stateRoot": "C:\\Users\\rizek\\.codex\\state\\plugins\\qgis-bridge\\v1",
-  "compatibility": {"target":"Windows x86-64; QGIS 4.2.0; PyQGIS QGIS_VERSION_INT 40200; bridge 0.1.0"},
+  "compatibility": {"target":"Windows x86-64; QGIS 4.2.0; PyQGIS QGIS_VERSION_INT 40200; bridge 0.1.1"},
   "testCommands": [
     {"command":"npm","args":["run","validate"],"cwd":"C:\\Users\\rizek\\plugins\\qgis-bridge","timeoutMs":120000},
     {"command":"npm","args":["run","test:live"],"cwd":"C:\\Users\\rizek\\plugins\\qgis-bridge","timeoutMs":300000}
@@ -49,4 +49,3 @@
     {"marketplace":"arkheos","selector":"qgis-bridge@arkheos","license":"GPL-3.0-or-later","requiresCertificate":true,"freshTask":true}
   ]}
 }
-

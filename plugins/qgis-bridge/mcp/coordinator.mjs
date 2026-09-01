@@ -6,7 +6,7 @@ import { atomicWrite } from "./state.mjs";
 
 export const PROTOCOL = "qgis-bridge/1";
 export const APPLICATION_VERSION = "4.2.0";
-export const BRIDGE_VERSION = "0.1.0";
+export const BRIDGE_VERSION = "0.1.1";
 export const API_VERSION = "PyQGIS 4.2.0 / 40200";
 const MAX_BODY = 2 * 1024 * 1024;
 

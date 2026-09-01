@@ -1,6 +1,6 @@
 {
   "name": "qgis-bridge",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Certified native QGIS Bridge for inspection, bounded GIS edits, layout export, and exact rollback.",
   "author": { "name": "Rizek" },
   "license": "GPL-3.0-or-later",
@@ -15,4 +15,3 @@
     "composerIcon": "./assets/composer-icon.png"
   }
 }
-
