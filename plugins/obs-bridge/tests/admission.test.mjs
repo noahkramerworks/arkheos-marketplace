@@ -26,7 +26,7 @@ function fixture(t) {
 
 test("profile admits one official version-bound native protocol with typed read, write, readback, and rollback", () => {
   assert.equal(profile.schema, "bridge-profile/v1.2");
-  assert.equal(profile.pluginVersion, "0.2.0");
+  assert.equal(profile.pluginVersion, "0.2.1");
   assert.equal(profile.controlSurface.kind, "native-protocol");
   assert.equal(profile.controlSurface.authority, "OBS Studio bundled obs-websocket protocol");
   assert.equal(profile.controlSurface.version, "OBS Studio 32.2.1 / obs-websocket 5.7.4 / RPC 1");
@@ -71,7 +71,7 @@ test("typed write is independently observed and exact receipt rollback restores 
     ],
   }, fx.options);
   assert.equal(applied.status, "verified");
-  assert.equal(applied.pluginVersion, "0.2.0");
+  assert.equal(applied.pluginVersion, "0.2.1");
 
   const changed = await inspectObs({}, fx.options);
   assert.equal(changed.scenes.some((scene) => scene.sceneName === "Admission Fixture"), true);

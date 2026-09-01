@@ -16,13 +16,13 @@ open_questions: []
 
 # Intent and non-goals
 
-OBS Bridge 0.2.0 recertifies the existing four-Skill, three-tool bridge against Bridge Runtime 0.2.0's machine-enforced `bridge-profile/v1.2` API-admission contract. The admitted boundary is OBS Studio 32.2.1's bundled obs-websocket 5.7.4 native protocol at RPC version 1. The bridge remains a narrow protocol-only adapter for typed scene/input inspection, verified creation, and receipt-bound rollback.
+OBS Bridge 0.2.1 preserves the recertified four-Skill, three-tool boundary from 0.2.0 and corrects inspection so a read-only call performs no durable bridge-state write. It remains certified against Bridge Runtime 0.2.0's machine-enforced `bridge-profile/v1.2` API-admission contract. The admitted boundary is OBS Studio 32.2.1's bundled obs-websocket 5.7.4 native protocol at RPC version 1.
 
 This release does not add a product workflow, UI automation, screen interpretation, controller scripting, raw RPC, command execution, unrestricted paths, output/stream/record control, credential persistence, cloud service, native binary, or generic automation surface. Stream Showrunner remains a separate product plugin that composes this bridge.
 
 # Authoritative evidence and alternatives
 
-The existing 0.1.2 source, accepted design, tests, live canary, installed OBS 32.2.1 executable, bundled obs-websocket module, observed `GetVersion` response, Bridge Runtime 0.2.0 contracts, and rollout session `01a05874-6b6f-7640-b77a-8e8db02a9096` are authoritative. Public product documentation is intentionally not used.
+The existing 0.2.0 source and certificate, the public fresh-task observation that inspection wrote `enrollment.json`, accepted design, tests, live canary, installed OBS 32.2.1 executable, bundled obs-websocket module, observed `GetVersion` response, Bridge Runtime 0.2.0 contracts, and rollout session `01a05874-6b6f-7640-b77a-8e8db02a9096` are authoritative. Public product documentation is intentionally not used.
 
 The retained protocol-only adapter is preferred over a compiled in-process extension because the bundled native protocol already exposes version negotiation, typed reads and writes, independent readback, and exact reversible effects. UI automation and generic request passthrough are rejected by the admission contract. No open design questions remain.
 
@@ -38,7 +38,7 @@ The `obs_bridge` MCP server continues to expose exactly `inspect`, `apply_scene_
 
 OBS remains authoritative for native scene, input, version, capability, and video state. The bridge owns plan admission, bounded pre-state, immutable content-addressed receipts, independent native readback, exact restoration proof, and fail-closed recovery classification. Existing state under `C:\Users\rizek\.codex\state\plugins\obs-bridge\v1` and all earlier receipts remain valid and immutable.
 
-Canonical source remains `C:\Users\rizek\plugins\obs-bridge` with required clean Git provenance. Existing v1.1 evidence and certificates remain immutable history and are stale for promotion until this exact 0.2.0 revision receives a current v1.2 certificate.
+Canonical source remains `C:\Users\rizek\plugins\obs-bridge` with required clean Git provenance. Existing v1.1 evidence and certificates and the v1.2 certificate for 0.2.0 remain immutable history. Promotion requires a new current v1.2 certificate for the exact 0.2.1 revision.
 
 # API admission and release profile
 
@@ -50,7 +50,7 @@ Release targets are `obs-bridge@personal` and `obs-bridge@arkheos`, both Apache-
 
 # Activation and verification
 
-Update all version-bearing package, MCP, receipt, test, Skill/reference, design, and recovery text to 0.2.0 without changing the receipt schema. Add `npm run test:admission` for the profile, typed capability, independent readback, exact rollback, and forbidden-surface assertions. Keep `npm test` deterministic and `npm run test:live` as the native canary.
+Update all version-bearing package, MCP, receipt, test, Skill/reference, design, and recovery text to 0.2.1 without changing the receipt schema. Preserve `npm run test:admission` for the profile, typed capability, independent readback, exact rollback, forbidden-surface assertions, and a negative proof that inspection writes no bridge state. Keep `npm test` deterministic and `npm run test:live` as the native canary.
 
 The live canary creates a uniquely named isolated scene and color input through typed WebSocket requests, observes both independently, rolls back by immutable receipt, and proves the complete bounded pre-state fingerprint equals the restored fingerprint. Its evidence must record OBS 32.2.1, obs-websocket 5.7.4, RPC 1, application and contract artifact hashes, read/write/rollback receipt identities, and clean source revision.
 
@@ -59,7 +59,7 @@ Run the Codex Runtime blocking plugin audit with explicit positive, negative, mi
 # Acceptance tests
 
 - The profile is admitted only as the official version-bound native protocol and rejects every weak-surface flag or missing typed capability.
-- Package, protocol-negative, isolated workflow, audit, and native canary tests pass at the exact clean 0.2.0 Git revision.
+- Package, protocol-negative, isolated workflow, audit, and native canary tests pass at the exact clean 0.2.1 Git revision.
 - Native write success is insufficient without separate scene/input readback, and rollback is insufficient without equality of the pre-state and restored-state fingerprints.
 - The certificate binds application artifacts, control-surface artifacts, typed read/write probes, independent observation, exact restoration, audit evidence, and fresh-task evidence.
 - Bridge Runtime reports promotion-ready for both `personal` and `arkheos`; neither marketplace is mutated before that gate passes.

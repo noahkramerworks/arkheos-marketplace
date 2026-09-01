@@ -2,11 +2,11 @@
 
 Bridge Runtime-certified, reversible OBS Studio control for Codex through the native obs-websocket protocol.
 
-Version 0.2.0 is bound to OBS Studio 32.2.1, bundled obs-websocket 5.7.4, and RPC 1. The release is Apache-2.0 and targets both `obs-bridge@personal` and `obs-bridge@arkheos`.
+Version 0.2.1 is bound to OBS Studio 32.2.1, bundled obs-websocket 5.7.4, and RPC 1. The release is Apache-2.0 and targets both `obs-bridge@personal` and `obs-bridge@arkheos`.
 
 The plugin contributes four focused Skills and one bundled stdio MCP server with three tools:
 
-- `inspect` observes connection, version, capabilities, scenes, inputs, and video settings.
+- `inspect` observes connection, version, capabilities, scenes, inputs, and video settings without writing bridge state.
 - `apply_scene_plan` creates missing scenes and inputs, verifies them, and automatically rolls back bridge-created resources on failure.
 - `rollback_receipt` explicitly reverses resources created by one receipt.
 

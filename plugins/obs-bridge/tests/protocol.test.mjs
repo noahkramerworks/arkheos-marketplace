@@ -54,7 +54,7 @@ test("authentication fails closed when the password is absent", async () => {
 test("MCP server exposes exactly three tools and bounded protocol errors", async () => {
   const initialized = await handleRpc({ jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-06-18" } });
   assert.equal(initialized.result.serverInfo.name, "obs-bridge");
-  assert.equal(initialized.result.serverInfo.version, "0.2.0");
+  assert.equal(initialized.result.serverInfo.version, "0.2.1");
   const listed = await handleRpc({ jsonrpc: "2.0", id: 2, method: "tools/list" });
   assert.deepEqual(listed.result.tools.map((tool) => tool.name), ["inspect", "apply_scene_plan", "rollback_receipt"]);
   assert.equal(TOOLS.length, 3);

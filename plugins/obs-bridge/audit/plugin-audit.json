@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "target": "C:\\Users\\rizek\\plugins\\obs-bridge",
+  "design": "C:\\Users\\rizek\\plugins\\obs-bridge\\design\\plugin.md",
+  "audited_at": "2026-09-01T01:14:38.943Z",
+  "checks": [
+    {
+      "name": "personal-interface-assets",
+      "status": "passed",
+      "detail": "Manifest and deterministic PNG assets match personal-png-v1"
+    },
+    {
+      "name": "instruction-graph",
+      "status": "passed",
+      "detail": "7 Markdown files and 6 linked files inspected"
+    },
+    {
+      "name": "mcp-declaration",
+      "status": "passed",
+      "detail": "1 MCP server declarations inspected"
+    },
+    {
+      "name": "nonempty-contained-source",
+      "status": "passed",
+      "detail": "Package files are nonempty and contained"
+    },
+    {
+      "name": "negative-tests",
+      "status": "passed",
+      "detail": "4 test files include negative/failure assertions"
+    },
+    {
+      "name": "fresh-task-continuity",
+      "status": "passed",
+      "detail": "Root recovery entrypoint inspected"
+    },
+    {
+      "name": "positive-prompts",
+      "status": "passed",
+      "detail": "The 15-test package suite exercised strictly read-only native inspection, a typed ensure-scene/ensure-input transaction, immutable receipt creation, independent readback, explicit rollback, and exact bounded-state restoration. The separate live OBS 32.2.1 canary passed against obs-websocket 5.7.4 / RPC 1 at bridge version 0.2.1."
+    },
+    {
+      "name": "negative-prompts",
+      "status": "passed",
+      "detail": "Protocol and admission tests prove exactly three closed tools and reject raw_rpc, arbitrary actions, credentials, duplicate resources, type conflicts, commands, code, scripts, protocol payloads, and filesystem paths. A regression test proves inspect performs only typed Get* requests and leaves the supplied state root empty. The v1.2 profile marks controller-only, UI automation, screen scraping, raw passthrough, and export-only behavior false."
+    },
+    {
+      "name": "missing-context",
+      "status": "passed",
+      "detail": "Authentication fails closed without OBS_WEBSOCKET_PASSWORD, invalid or non-loopback endpoints are rejected, missing native requests block mutation, unknown receipts fail closed, and the inspection Skill reports missing OBS, closed WebSocket, authentication, timeout, or version drift without guessing or persisting a partial enrollment."
+    },
+    {
+      "name": "failure-prompts",
+      "status": "passed",
+      "detail": "Injected readback failure automatically removes only resources created in the current transaction; foreign state blocks scene deletion; repeated rollback is idempotent; stale ownership is classified manual-recovery-required. The live canary's pre-state and restored-state fingerprints were identical, and the failed public fresh-task read-only condition is now covered by a deterministic no-write regression test."
+    }
+  ],
+  "findings": [],
+  "final_result": "passed"
+}

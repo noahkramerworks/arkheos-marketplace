@@ -16,7 +16,7 @@ function pngInfo(relative) {
 test("package identity, contributions, and interface assets match the accepted design", () => {
   const manifest = json(".codex-plugin/plugin.json");
   assert.equal(manifest.name, "obs-bridge");
-  assert.equal(manifest.version, "0.2.0");
+  assert.equal(manifest.version, "0.2.1");
   assert.equal(manifest.license, "Apache-2.0");
   assert.equal(json("package.json").license, "Apache-2.0");
   assert.equal(manifest.skills, "./skills/");
@@ -26,7 +26,7 @@ test("package identity, contributions, and interface assets match the accepted d
   assert.deepEqual(Object.keys(json(".mcp.json").mcpServers), ["obs_bridge"]);
   const profile = json("bridge/profile.json");
   assert.equal(profile.schema, "bridge-profile/v1.2");
-  assert.equal(profile.pluginVersion, "0.2.0");
+  assert.equal(profile.pluginVersion, "0.2.1");
   assert.equal(profile.controlSurface.kind, "native-protocol");
   assert.equal(profile.certificationTiers[0], "api-contract-admission");
   assert.deepEqual(profile.release.targets.map(({ marketplace, selector }) => ({ marketplace, selector })), [

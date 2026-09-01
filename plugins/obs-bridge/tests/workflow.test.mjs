@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { existsSync, mkdtempSync, readdirSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -21,14 +21,19 @@ const plan = {
   ],
 };
 
-test("inspect records bounded native observations without secrets", async (t) => {
+test("inspect returns bounded native observations without writing bridge state", async (t) => {
   const fx = fixture(t);
   const result = await inspectObs({}, fx.options);
   assert.equal(result.status, "observed");
   assert.equal(result.version.obsVersion, "32.2.1");
-  const enrollment = readFileSync(path.join(fx.stateRoot, "enrollment.json"), "utf8");
-  assert.doesNotMatch(enrollment, /not-persisted/);
-  assert.match(enrollment, /ws:\/\/127\.0\.0\.1:4455/);
+  assert.deepEqual(readdirSync(fx.stateRoot), []);
+  assert.deepEqual(fx.mock.calls.map(({ requestType }) => requestType), [
+    "GetVersion",
+    "GetSceneList",
+    "GetInputList",
+    "GetInputKindList",
+    "GetVideoSettings",
+  ]);
 });
 
 test("apply verifies resources, persists a receipt, and reuses matching state", async (t) => {

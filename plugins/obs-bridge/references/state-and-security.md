@@ -2,7 +2,7 @@
 
 Durable state lives at `$CODEX_HOME/state/plugins/obs-bridge/v1` or the equivalent `USERPROFILE/.codex` fallback on Windows.
 
-- `enrollment.json` contains only endpoint metadata, negotiated versions, and observation time.
+- `enrollment.json` contains only endpoint metadata, negotiated versions, and observation time, and is written only during a mutating transaction preflight. Read-only inspection never creates or updates durable bridge state.
 - `receipts/<sha256>.json` contains immutable, content-addressed receipts.
 - Writes use same-directory temporary files followed by atomic rename.
 - Passwords, tokens, authentication challenges, and credential-like values are redacted recursively.

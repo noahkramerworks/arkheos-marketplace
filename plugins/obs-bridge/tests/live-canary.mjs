@@ -1,10 +1,10 @@
 import { applyScenePlan, inspectObs, rollbackReceipt } from "../mcp/operations.mjs";
 import { sha256, stableStringify } from "../mcp/state.mjs";
 
-const sceneName = "Bridge 0.2.0 Native Canary";
-const inputName = "Bridge 0.2.0 Native Canary Color";
+const sceneName = "Bridge 0.2.1 Native Canary";
+const inputName = "Bridge 0.2.1 Native Canary Color";
 const plan = {
-  planId: "obs-bridge-0.2.0-native-canary",
+  planId: "obs-bridge-0.2.1-native-canary",
   actions: [
     { type: "ensure_scene", sceneName },
     { type: "ensure_input", sceneName, inputName, inputKind: "color_source_v3", inputSettings: { color: 4278190335, width: 320, height: 240 }, sceneItemEnabled: true },
@@ -12,7 +12,7 @@ const plan = {
 };
 
 const applied = await applyScenePlan(plan);
-if (applied.status !== "verified" || applied.pluginVersion !== "0.2.0") throw new Error("OBS native apply did not verify the release version");
+if (applied.status !== "verified" || applied.pluginVersion !== "0.2.1") throw new Error("OBS native apply did not verify the release version");
 const observed = await inspectObs();
 const scene = observed.scenes.find((item) => item.sceneName === sceneName);
 const input = observed.inputs.find((item) => item.inputName === inputName);

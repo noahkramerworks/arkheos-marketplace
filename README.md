@@ -14,7 +14,7 @@ codex plugin marketplace add noahkramerworks/arkheos-marketplace --ref main
 |---|---|---|---|---|
 | Blender 0.2.0 | Blender 5.2.1 Python API | Inspect, edit, render, export, and undo a scene transaction. | `codex plugin add blender-bridge@arkheos` | GPL-3.0-or-later |
 | Godot 0.2.0 | Godot 4.7 editor API | Inspect, edit, playtest, export, and restore a project revision. | `codex plugin add godot-bridge@arkheos` | Apache-2.0 |
-| OBS 0.2.0 | OBS 32.2.1 WebSocket protocol | Inspect, apply, verify, and undo a studio scene plan. | `codex plugin add obs-bridge@arkheos` | Apache-2.0 |
+| OBS 0.2.1 | OBS 32.2.1 WebSocket protocol | Inspect, apply, verify, and undo a studio scene plan. | `codex plugin add obs-bridge@arkheos` | Apache-2.0 |
 | REAPER 0.2.0 | REAPER 7.79 native extension | Inspect, edit, render, and restore a saved project. | `codex plugin add reaper-bridge@arkheos` | Apache-2.0 |
 | KiCad 0.1.0 | KiCad 10.0.5 IPC API | Inspect, change, render, and exactly restore a PCB. | `codex plugin add kicad-bridge@arkheos` | Apache-2.0 |
 | QGIS 0.1.0 | QGIS 4.2.0 PyQGIS API | Add and style a layer, render a layout, and restore the project. | `codex plugin add qgis-bridge@arkheos` | GPL-3.0-or-later |

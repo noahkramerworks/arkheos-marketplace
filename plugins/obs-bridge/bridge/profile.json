@@ -1,7 +1,7 @@
 {
   "schema": "bridge-profile/v1.2",
   "bridgeId": "obs-bridge",
-  "pluginVersion": "0.2.0",
+  "pluginVersion": "0.2.1",
   "application": {"name": "OBS Studio", "authority": ["scenes", "inputs", "runtime"], "executable": "C:\\Program Files\\obs-studio\\bin\\64bit\\obs64.exe", "identityArtifacts": [{"label": "obs-executable", "path": "C:\\Program Files\\obs-studio\\bin\\64bit\\obs64.exe"}, {"label": "obs-websocket", "path": "C:\\Program Files\\obs-studio\\obs-plugins\\64bit\\obs-websocket.dll"}]},
   "controlSurface": {
     "kind": "native-protocol",

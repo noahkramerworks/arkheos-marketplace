@@ -77,12 +77,10 @@ function enrollment(endpoint, observation) {
 
 export async function inspectObs(args = {}, options = {}) {
   const endpoint = endpointArgs(args);
-  const stateRoot = resolveStateRoot(options.env || process.env, options.stateRoot);
   const { client, version } = await connect(endpoint, options);
   try {
     assertRequests(version, INSPECT_REQUESTS);
     const observation = await observe(client, version);
-    writeEnrollment(stateRoot, enrollment(endpoint, observation));
     return { schema: "obs-bridge/observation/v1", status: "observed", endpoint, observedAt: new Date().toISOString(), ...observation };
   } finally {
     client.close();
@@ -207,7 +205,7 @@ async function rollbackCreated(client, created) {
 function receiptBody({ plan, endpoint, observation, preStateFingerprint, created, reused, effects, status, classification, rollback = null, error = null }) {
   return {
     schema: "obs-bridge/receipt/v1",
-    pluginVersion: "0.2.0",
+    pluginVersion: "0.2.1",
     planId: plan.planId,
     status,
     classification,
@@ -350,7 +348,7 @@ export async function rollbackReceipt(args, options = {}) {
     }
     const rollbackBody = {
       schema: "obs-bridge/receipt/v1",
-      pluginVersion: "0.2.0",
+      pluginVersion: "0.2.1",
       planId: `rollback:${source.receiptId}`,
       status: uncertain ? "manual-recovery-required" : "rolled-back",
       classification: "explicit-rollback",

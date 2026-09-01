@@ -1,6 +1,6 @@
 {
   "name": "obs-bridge",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Certified native, reversible OBS Studio control for Codex through obs-websocket.",
   "author": {
     "name": "Rizek"
