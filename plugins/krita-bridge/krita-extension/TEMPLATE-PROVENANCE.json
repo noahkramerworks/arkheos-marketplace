@@ -1,0 +1,6 @@
+{
+  "schema": "bridge-template-provenance/v1",
+  "adapter": "reverse-polling-extension",
+  "templateDigest": "3210cf2f829a87a9595345bc296683ce09460fc8d70f2e1478f50549322251d7",
+  "runtimeDependency": false
+}

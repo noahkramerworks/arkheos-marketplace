@@ -1,0 +1,122 @@
+{
+  "schema": "bridge-profile/v1.2",
+  "bridgeId": "blender-bridge",
+  "pluginVersion": "0.2.0",
+  "application": {
+    "name": "Blender",
+    "authority": ["scene", "dependency-graph", "render", "viewport", "export"],
+    "executable": "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+    "identityArtifacts": [
+      {
+        "label": "blender-executable",
+        "path": "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe"
+      }
+    ]
+  },
+  "controlSurface": {
+    "kind": "documented-application-api",
+    "authority": "Blender Foundation Blender Python API (bpy)",
+    "version": "Blender 5.2.1 LTS / bpy 5.2.1",
+    "contractArtifacts": [
+      {
+        "label": "blender-python-api-runtime",
+        "path": "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe"
+      }
+    ],
+    "exposure": "bridge-owned-authenticated-loopback",
+    "typedReads": [
+      "inspect-scene-state",
+      "inspect-dependency-graph",
+      "inspect-render-state"
+    ],
+    "typedWrites": [
+      "apply-scene-transaction",
+      "save-project",
+      "export-artifact"
+    ],
+    "admissionCommand": {
+      "command": "npm.cmd",
+      "args": ["run", "test:admission"],
+      "cwd": "C:\\Users\\rizek\\plugins\\blender-bridge",
+      "timeoutMs": 300000
+    },
+    "independentReadback": true,
+    "exactRollback": true,
+    "controllerOnly": false,
+    "uiAutomation": false,
+    "screenScraping": false,
+    "rawPassthrough": false,
+    "exportOnly": false
+  },
+  "adapter": "hybrid-extension-batch",
+  "adapterRoots": ["blender-extension", "mcp"],
+  "sourceRoot": "C:\\Users\\rizek\\plugins\\blender-bridge",
+  "sourceProvenance": {
+    "vcs": "git",
+    "requireClean": true,
+    "digestPolicy": "bridge-source/v1"
+  },
+  "stateRoot": "C:\\Users\\rizek\\.codex\\state\\plugins\\blender-bridge\\v1",
+  "compatibility": {
+    "target": "Blender 5.2.1 LTS Windows x86-64"
+  },
+  "testCommands": [
+    {
+      "command": "npm.cmd",
+      "args": ["test"],
+      "cwd": "C:\\Users\\rizek\\plugins\\blender-bridge",
+      "timeoutMs": 300000
+    },
+    {
+      "command": "npm.cmd",
+      "args": ["run", "test:admission"],
+      "cwd": "C:\\Users\\rizek\\plugins\\blender-bridge",
+      "timeoutMs": 300000
+    },
+    {
+      "command": "npm.cmd",
+      "args": ["run", "test:live"],
+      "cwd": "C:\\Users\\rizek\\plugins\\blender-bridge",
+      "timeoutMs": 900000
+    }
+  ],
+  "certificationTiers": [
+    "api-contract-admission",
+    "package-design-audit",
+    "protocol-negative-tests",
+    "isolated-native-fixture",
+    "live-application-canary",
+    "rollback-recovery-discovery"
+  ],
+  "nativeCanary": {
+    "command": {
+      "command": "npm.cmd",
+      "args": ["run", "test:live"],
+      "cwd": "C:\\Users\\rizek\\plugins\\blender-bridge",
+      "timeoutMs": 900000
+    },
+    "independentReadback": true
+  },
+  "rollback": {
+    "receiptSchema": "blender-bridge/receipt/v1",
+    "exactBytes": true
+  },
+  "release": {
+    "targets": [
+      {
+        "marketplace": "personal",
+        "selector": "blender-bridge@personal",
+        "license": "GPL-3.0-or-later",
+        "requiresCertificate": true,
+        "freshTask": true
+      },
+      {
+        "marketplace": "arkheos",
+        "selector": "blender-bridge@arkheos",
+        "license": "GPL-3.0-or-later",
+        "requiresCertificate": true,
+        "freshTask": true
+      }
+    ]
+  }
+}

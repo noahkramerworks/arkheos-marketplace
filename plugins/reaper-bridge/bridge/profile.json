@@ -1,0 +1,60 @@
+{
+  "schema": "bridge-profile/v1.2",
+  "bridgeId": "reaper-bridge",
+  "pluginVersion": "0.2.0",
+  "application": {
+    "name": "REAPER",
+    "authority": ["project", "track", "fx", "transport", "render", "undo"],
+    "executable": "C:\\Program Files\\REAPER (x64)\\reaper.exe",
+    "identityArtifacts": [
+      {"label": "reaper-executable", "path": "C:\\Program Files\\REAPER (x64)\\reaper.exe"},
+      {"label": "installed-native-extension", "path": "C:\\Users\\rizek\\AppData\\Roaming\\REAPER\\UserPlugins\\reaper_codex_bridge.dll"},
+      {"label": "packaged-native-extension", "path": "C:\\Users\\rizek\\plugins\\reaper-bridge\\native\\dist\\reaper_codex_bridge.dll"}
+    ]
+  },
+  "controlSurface": {
+    "kind": "documented-application-api",
+    "authority": "REAPER 7.79 C/C++ extension plug-in API",
+    "version": "REAPER 7.79 / REAPER_PLUGIN_VERSION 0x20E / SDK commit 490ded57668727fba21482fabc50ba9853a457bb",
+    "contractArtifacts": [
+      {"label": "reaper-sdk-provenance", "path": "C:\\Users\\rizek\\plugins\\reaper-bridge\\native\\vendor\\reaper-sdk\\PROVENANCE.json"},
+      {"label": "reaper-plugin-api", "path": "C:\\Users\\rizek\\plugins\\reaper-bridge\\native\\vendor\\reaper-sdk\\reaper_plugin.h"},
+      {"label": "reaper-function-api", "path": "C:\\Users\\rizek\\plugins\\reaper-bridge\\native\\vendor\\reaper-sdk\\reaper_plugin_functions.h"},
+      {"label": "bridge-api-contract", "path": "C:\\Users\\rizek\\plugins\\reaper-bridge\\references\\reaper-api-contract.md"}
+    ],
+    "exposure": "bridge-owned-authenticated-loopback",
+    "typedReads": ["inspect-installation", "inspect-project-state"],
+    "typedWrites": ["apply-project-transaction", "render-master", "rollback-receipt"],
+    "admissionCommand": {"command": "npm.cmd", "args": ["run", "test:admission"], "cwd": "C:\\Users\\rizek\\plugins\\reaper-bridge", "timeoutMs": 300000},
+    "independentReadback": true,
+    "exactRollback": true,
+    "controllerOnly": false,
+    "uiAutomation": false,
+    "screenScraping": false,
+    "rawPassthrough": false,
+    "exportOnly": false
+  },
+  "adapter": "reverse-polling-extension",
+  "adapterRoots": ["reaper-extension", "native", "mcp"],
+  "sourceRoot": "C:\\Users\\rizek\\plugins\\reaper-bridge",
+  "sourceProvenance": {"vcs": "git", "requireClean": true, "digestPolicy": "bridge-source/v1"},
+  "stateRoot": "C:\\Users\\rizek\\.codex\\state\\plugins\\reaper-bridge\\v1",
+  "compatibility": {"target": "REAPER 7.79 Windows x86-64 with bridge extension 0.2.0 and API 0x20E"},
+  "testCommands": [
+    {"command": "npm.cmd", "args": ["test"], "cwd": "C:\\Users\\rizek\\plugins\\reaper-bridge", "timeoutMs": 900000},
+    {"command": "npm.cmd", "args": ["run", "test:admission"], "cwd": "C:\\Users\\rizek\\plugins\\reaper-bridge", "timeoutMs": 300000},
+    {"command": "npm.cmd", "args": ["run", "test:live"], "cwd": "C:\\Users\\rizek\\plugins\\reaper-bridge", "timeoutMs": 900000}
+  ],
+  "certificationTiers": ["api-contract-admission", "package-design-audit", "protocol-negative-tests", "isolated-native-fixture", "live-application-canary", "rollback-recovery-discovery"],
+  "nativeCanary": {
+    "command": {"command": "npm.cmd", "args": ["run", "test:live"], "cwd": "C:\\Users\\rizek\\plugins\\reaper-bridge", "timeoutMs": 900000},
+    "independentReadback": true
+  },
+  "rollback": {"receiptSchema": "reaper-bridge/receipt/v1", "exactBytes": true},
+  "release": {
+    "targets": [
+      {"marketplace": "personal", "selector": "reaper-bridge@personal", "license": "Apache-2.0", "requiresCertificate": true, "freshTask": true},
+      {"marketplace": "arkheos", "selector": "reaper-bridge@arkheos", "license": "Apache-2.0", "requiresCertificate": true, "freshTask": true}
+    ]
+  }
+}

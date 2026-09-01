@@ -1,0 +1,77 @@
+{
+  "schema": "bridge-profile/v1.2",
+  "bridgeId": "godot-bridge",
+  "pluginVersion": "0.2.0",
+  "application": {
+    "name": "Godot",
+    "authority": ["editor", "scene", "runtime", "viewport", "export"],
+    "executable": "C:\\Users\\rizek\\Documents\\Codex\\2026-07-31\\ch\\work\\toolchains\\godot-4.7.1\\Godot_v4.7.1-stable_win64_console.exe",
+    "identityArtifacts": [
+      {
+        "label": "godot-console-executable",
+        "path": "C:\\Users\\rizek\\Documents\\Codex\\2026-07-31\\ch\\work\\toolchains\\godot-4.7.1\\Godot_v4.7.1-stable_win64_console.exe"
+      }
+    ]
+  },
+  "controlSurface": {
+    "kind": "documented-application-api",
+    "authority": "Godot Engine 4.7 EditorPlugin, EditorInterface, and editor debugger APIs",
+    "version": "Godot 4.7.1 stable / editor API 4.7",
+    "contractArtifacts": [
+      {
+        "label": "godot-editor-api-runtime",
+        "path": "C:\\Users\\rizek\\Documents\\Codex\\2026-07-31\\ch\\work\\toolchains\\godot-4.7.1\\Godot_v4.7.1-stable_win64_console.exe"
+      },
+      {
+        "label": "bridge-editor-plugin-contract",
+        "path": "C:\\Users\\rizek\\plugins\\godot-bridge\\godot-addon\\codex_godot_bridge\\bridge_plugin.gd"
+      }
+    ],
+    "exposure": "bridge-owned-authenticated-loopback",
+    "typedReads": ["inspect-project-state", "inspect-scene-state", "inspect-playtest-state"],
+    "typedWrites": ["apply-project-transaction", "run-playtest", "export-artifact"],
+    "admissionCommand": {
+      "command": "npm.cmd",
+      "args": ["run", "test:admission"],
+      "cwd": "C:\\Users\\rizek\\plugins\\godot-bridge",
+      "timeoutMs": 300000
+    },
+    "independentReadback": true,
+    "exactRollback": true,
+    "controllerOnly": false,
+    "uiAutomation": false,
+    "screenScraping": false,
+    "rawPassthrough": false,
+    "exportOnly": false
+  },
+  "adapter": "hybrid-extension-batch",
+  "adapterRoots": ["godot-addon", "mcp"],
+  "sourceRoot": "C:\\Users\\rizek\\plugins\\godot-bridge",
+  "sourceProvenance": {"vcs": "git", "requireClean": true, "digestPolicy": "bridge-source/v1"},
+  "stateRoot": "C:\\Users\\rizek\\.codex\\state\\plugins\\godot-bridge\\v1",
+  "compatibility": {"target": "Godot 4.7 editor API via Godot 4.7.1 stable Windows x86-64"},
+  "testCommands": [
+    {"command": "npm.cmd", "args": ["test"], "cwd": "C:\\Users\\rizek\\plugins\\godot-bridge", "timeoutMs": 900000},
+    {"command": "npm.cmd", "args": ["run", "test:admission"], "cwd": "C:\\Users\\rizek\\plugins\\godot-bridge", "timeoutMs": 300000},
+    {"command": "npm.cmd", "args": ["run", "test:live"], "cwd": "C:\\Users\\rizek\\plugins\\godot-bridge", "timeoutMs": 900000}
+  ],
+  "certificationTiers": [
+    "api-contract-admission",
+    "package-design-audit",
+    "protocol-negative-tests",
+    "isolated-native-fixture",
+    "live-application-canary",
+    "rollback-recovery-discovery"
+  ],
+  "nativeCanary": {
+    "command": {"command": "npm.cmd", "args": ["run", "test:live"], "cwd": "C:\\Users\\rizek\\plugins\\godot-bridge", "timeoutMs": 900000},
+    "independentReadback": true
+  },
+  "rollback": {"receiptSchema": "godot-bridge/receipt/v1", "exactBytes": true},
+  "release": {
+    "targets": [
+      {"marketplace": "personal", "selector": "godot-bridge@personal", "license": "Apache-2.0", "requiresCertificate": true, "freshTask": true},
+      {"marketplace": "arkheos", "selector": "godot-bridge@arkheos", "license": "Apache-2.0", "requiresCertificate": true, "freshTask": true}
+    ]
+  }
+}

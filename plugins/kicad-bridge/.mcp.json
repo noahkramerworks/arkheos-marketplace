@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "kicad_bridge": {
+      "command": "node",
+      "args": ["./mcp/server.mjs"],
+      "cwd": ".",
+      "env_vars": ["CODEX_HOME", "USERPROFILE", "PATH", "KICAD_ROOT", "KICAD_PCBNEW", "KICAD_CLI"],
+      "startup_timeout_sec": 15,
+      "tool_timeout_sec": 300
+    }
+  }
+}

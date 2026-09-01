@@ -1,0 +1,9 @@
+node_modules/
+coverage/
+dist/
+exports/
+logs/
+task-artifacts/
+.tmp/
+*.log
+

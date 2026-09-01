@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "freecad-bridge/transaction/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["documentPath", "expectedRevision", "actions"],
+  "properties": {
+    "documentPath": {"type": "string", "pattern": "^[A-Za-z]:\\\\.*\\.FCStd$"},
+    "expectedRevision": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "actions": {
+      "type": "array", "minItems": 1, "maxItems": 32,
+      "items": {
+        "oneOf": [
+          {"type":"object","additionalProperties":false,"required":["type","name","length","width","height"],"properties":{"type":{"const":"create_box"},"name":{"type":"string","minLength":1,"maxLength":80},"length":{"type":"number","exclusiveMinimum":0,"maximum":100000},"width":{"type":"number","exclusiveMinimum":0,"maximum":100000},"height":{"type":"number","exclusiveMinimum":0,"maximum":100000}}},
+          {"type":"object","additionalProperties":false,"required":["type","name","radius","height"],"properties":{"type":{"const":"create_cylinder"},"name":{"type":"string","minLength":1,"maxLength":80},"radius":{"type":"number","exclusiveMinimum":0,"maximum":100000},"height":{"type":"number","exclusiveMinimum":0,"maximum":100000}}},
+          {"type":"object","additionalProperties":false,"required":["type","objectName","property","value"],"properties":{"type":{"const":"set_dimension"},"objectName":{"type":"string","pattern":"^ArkheOS_[A-Za-z0-9_]{1,64}$"},"property":{"enum":["Length","Width","Height","Radius","Angle"]},"value":{"type":"number","exclusiveMinimum":0,"maximum":100000}}},
+          {"type":"object","additionalProperties":false,"required":["type","objectName","label"],"properties":{"type":{"const":"rename_owned_feature"},"objectName":{"type":"string","pattern":"^ArkheOS_[A-Za-z0-9_]{1,64}$"},"label":{"type":"string","minLength":1,"maxLength":80}}},
+          {"type":"object","additionalProperties":false,"required":["type","objectName"],"properties":{"type":{"const":"remove_owned_feature"},"objectName":{"type":"string","pattern":"^ArkheOS_[A-Za-z0-9_]{1,64}$"}}}
+        ]
+      }
+    }
+  }
+}

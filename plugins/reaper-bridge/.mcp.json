@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "reaper_bridge": {
+      "command": "node",
+      "args": ["./mcp/server.mjs"],
+      "cwd": ".",
+      "env_vars": ["CODEX_HOME", "USERPROFILE", "PATH", "REAPER_EXE"],
+      "startup_timeout_sec": 15,
+      "tool_timeout_sec": 300
+    }
+  }
+}
+

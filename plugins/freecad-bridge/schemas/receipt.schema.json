@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "freecad-bridge/receipt/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema","receiptId","documentPath","preSha256","postSha256","checkpointPath","preRevision","postRevision","actions","createdAt"],
+  "properties": {
+    "schema":{"const":"freecad-bridge/receipt/v1"},
+    "receiptId":{"type":"string","pattern":"^sha256:[a-f0-9]{64}$"},
+    "documentPath":{"type":"string"},"preSha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"postSha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"checkpointPath":{"type":"string"},
+    "preRevision":{"type":"string"},"postRevision":{"type":"string"},"actions":{"type":"array"},"createdAt":{"type":"string"}
+  }
+}

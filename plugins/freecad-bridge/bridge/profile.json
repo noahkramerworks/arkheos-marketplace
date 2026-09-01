@@ -1,0 +1,51 @@
+{
+  "schema": "bridge-profile/v1.2",
+  "bridgeId": "freecad-bridge",
+  "pluginVersion": "0.1.0",
+  "application": {
+    "name": "FreeCAD 1.1.3",
+    "authority": ["FreeCAD 1.1.3 Revision 20260725", "source 145529fe741292ff0b3977a01195bf0247425794"],
+    "executable": "C:\\Program Files\\FreeCAD 1.1\\bin\\FreeCAD.exe",
+    "identityArtifacts": [
+      {"label":"freecad-gui-executable","path":"C:\\Program Files\\FreeCAD 1.1\\bin\\FreeCAD.exe"},
+      {"label":"freecad-command-executable","path":"C:\\Program Files\\FreeCAD 1.1\\bin\\FreeCADCmd.exe"}
+    ]
+  },
+  "controlSurface": {
+    "kind": "documented-application-api",
+    "authority": "FreeCAD 1.1.3 documented Python/library API",
+    "version": "1.1.3 revision 20260725 source 145529fe741292ff0b3977a01195bf0247425794",
+    "contractArtifacts": [
+      {"label":"api-contract","path":"C:\\Users\\rizek\\plugins\\freecad-bridge\\references\\freecad-api-contract.md"},
+      {"label":"installer-provenance","path":"C:\\Users\\rizek\\plugins\\freecad-bridge\\references\\installer-provenance.md"}
+    ],
+    "exposure": "bridge-owned-authenticated-loopback",
+    "typedReads": ["application-identity","document-identity","object-inventory","parametric-properties","shape-observation"],
+    "typedWrites": ["create-feature","set-dimension","rename-owned-feature","remove-owned-feature"],
+    "admissionCommand": {"command":"node","args":["--test","tests/admission.test.mjs"],"cwd":"C:\\Users\\rizek\\plugins\\freecad-bridge","timeoutMs":120000},
+    "independentReadback": true,
+    "exactRollback": true,
+    "controllerOnly": false,
+    "uiAutomation": false,
+    "screenScraping": false,
+    "rawPassthrough": false,
+    "exportOnly": false
+  },
+  "adapter": "hybrid-extension-batch",
+  "adapterRoots": ["freecad-adapter"],
+  "sourceRoot": "C:\\Users\\rizek\\plugins\\freecad-bridge",
+  "sourceProvenance": {"vcs":"git","requireClean":true,"digestPolicy":"bridge-source/v1"},
+  "stateRoot": "C:\\Users\\rizek\\.codex\\state\\plugins\\freecad-bridge\\v1",
+  "compatibility": {"target":"Windows x86-64; FreeCAD 1.1.3 revision 20260725; Python API; bridge 0.1.0"},
+  "testCommands": [
+    {"command":"npm","args":["run","validate"],"cwd":"C:\\Users\\rizek\\plugins\\freecad-bridge","timeoutMs":120000},
+    {"command":"npm","args":["run","test:live"],"cwd":"C:\\Users\\rizek\\plugins\\freecad-bridge","timeoutMs":300000}
+  ],
+  "certificationTiers": ["api-contract-admission","package-design-audit","protocol-negative-tests","isolated-native-fixture","live-application-canary","rollback-recovery-discovery"],
+  "nativeCanary": {"command":{"command":"node","args":["scripts/live-canary.mjs"],"cwd":"C:\\Users\\rizek\\plugins\\freecad-bridge","timeoutMs":300000},"independentReadback":true},
+  "rollback": {"receiptSchema":"freecad-bridge/receipt/v1","exactBytes":true},
+  "release": {"targets":[
+    {"marketplace":"personal","selector":"freecad-bridge@personal","license":"Apache-2.0","requiresCertificate":true,"freshTask":true},
+    {"marketplace":"arkheos","selector":"freecad-bridge@arkheos","license":"Apache-2.0","requiresCertificate":true,"freshTask":true}
+  ]}
+}

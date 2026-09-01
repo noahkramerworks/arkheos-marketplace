@@ -69,7 +69,7 @@ export async function handleRpc(message, options = {}) {
       result: {
         protocolVersion: typeof message.params?.protocolVersion === "string" ? message.params.protocolVersion : "2025-06-18",
         capabilities: { tools: {} },
-        serverInfo: { name: "obs-bridge", title: "OBS Bridge", version: "0.1.2" },
+        serverInfo: { name: "obs-bridge", title: "OBS Bridge", version: "0.2.0" },
       },
     };
   }

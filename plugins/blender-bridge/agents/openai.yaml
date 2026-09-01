@@ -1,0 +1,4 @@
+interface:
+  display_name: "Blender Bridge"
+  short_description: "Build 3D scenes through verified native Blender operations"
+  default_prompt: "Inspect, edit, render, export, or roll back Blender through the focused native bridge Skill."

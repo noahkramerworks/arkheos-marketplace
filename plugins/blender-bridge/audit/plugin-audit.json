@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "target": "C:\\Users\\rizek\\plugins\\blender-bridge",
+  "design": "C:\\Users\\rizek\\plugins\\blender-bridge\\design\\plugin.md",
+  "audited_at": "2026-08-31T19:00:37.958Z",
+  "checks": [
+    {
+      "name": "personal-interface-assets",
+      "status": "passed",
+      "detail": "Manifest and deterministic PNG assets match personal-png-v1"
+    },
+    {
+      "name": "instruction-graph",
+      "status": "passed",
+      "detail": "13 Markdown files and 12 linked files inspected"
+    },
+    {
+      "name": "mcp-declaration",
+      "status": "passed",
+      "detail": "1 MCP server declarations inspected"
+    },
+    {
+      "name": "nonempty-contained-source",
+      "status": "passed",
+      "detail": "Package files are nonempty and contained"
+    },
+    {
+      "name": "negative-tests",
+      "status": "passed",
+      "detail": "4 test files include negative/failure assertions"
+    },
+    {
+      "name": "fresh-task-continuity",
+      "status": "passed",
+      "detail": "Root recovery entrypoint inspected"
+    },
+    {
+      "name": "positive-prompts",
+      "status": "passed",
+      "detail": "Seven package/protocol/workflow tests passed, the fixed Blender 5.2.1 bpy admission probe passed, and the native canary produced verified viewport, render, GLB, and USD artifacts before exact rollback."
+    },
+    {
+      "name": "negative-prompts",
+      "status": "passed",
+      "detail": "Protocol and workflow tests rejected execute_python, raw RNA-shaped fields, oversized geometry, invalid transaction IDs, unauthenticated loopback access, and cross-project queue reads."
+    },
+    {
+      "name": "missing-context",
+      "status": "passed",
+      "detail": "A harmless direct inspect_project call without projectFile returned an isError result with projectFile must be absolute and caused no native or filesystem mutation."
+    },
+    {
+      "name": "failure-prompts",
+      "status": "passed",
+      "detail": "Tests fail closed for stale revision, dirty state, forbidden fields, path violations, missing ownership, invalid receipts, hash mismatch, native readback mismatch, and uncertain restoration; recovery preserves manual-recovery-required."
+    }
+  ],
+  "findings": [],
+  "final_result": "passed"
+}

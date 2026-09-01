@@ -1,0 +1,26 @@
+{
+  "schema": "codex-plugin-audit-evidence/v1",
+  "target": "C:\\Users\\rizek\\plugins\\blender-bridge",
+  "checks": [
+    {
+      "name": "positive-prompts",
+      "passed": true,
+      "evidence": "Seven package/protocol/workflow tests passed, the fixed Blender 5.2.1 bpy admission probe passed, and the native canary produced verified viewport, render, GLB, and USD artifacts before exact rollback."
+    },
+    {
+      "name": "negative-prompts",
+      "passed": true,
+      "evidence": "Protocol and workflow tests rejected execute_python, raw RNA-shaped fields, oversized geometry, invalid transaction IDs, unauthenticated loopback access, and cross-project queue reads."
+    },
+    {
+      "name": "missing-context",
+      "passed": true,
+      "evidence": "A harmless direct inspect_project call without projectFile returned an isError result with projectFile must be absolute and caused no native or filesystem mutation."
+    },
+    {
+      "name": "failure-prompts",
+      "passed": true,
+      "evidence": "Tests fail closed for stale revision, dirty state, forbidden fields, path violations, missing ownership, invalid receipts, hash mismatch, native readback mismatch, and uncertain restoration; recovery preserves manual-recovery-required."
+    }
+  ]
+}

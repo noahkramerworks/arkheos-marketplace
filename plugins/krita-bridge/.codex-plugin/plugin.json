@@ -1,0 +1,17 @@
+{
+  "name": "krita-bridge",
+  "version": "0.1.0",
+  "description": "Certified native Krita Bridge for inspection, bounded paint-layer edits, PNG export, and exact rollback.",
+  "author": { "name": "Rizek" },
+  "license": "GPL-3.0-or-later",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Krita Bridge",
+    "shortDescription": "Control Krita through a certified native bridge.",
+    "developerName": "Rizek",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/composer-icon.png"
+  }
+}

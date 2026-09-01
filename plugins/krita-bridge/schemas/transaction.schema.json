@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "krita-bridge/transaction/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["documentPath", "expectedRevision", "actions"],
+  "properties": {
+    "documentPath": {"type":"string","pattern":"^[A-Za-z]:\\\\.*\\.kra$"},
+    "expectedRevision": {"type":"string","pattern":"^sha256:[a-f0-9]{64}$"},
+    "actions": {
+      "type": "array", "minItems": 1, "maxItems": 32,
+      "items": {
+        "oneOf": [
+          {"type":"object","additionalProperties":false,"required":["type","name"],"properties":{"type":{"const":"create_paint_layer"},"name":{"type":"string","pattern":"^ArkheOS_[A-Za-z0-9_-]{1,48}$"}}},
+          {"type":"object","additionalProperties":false,"required":["type","layerId","name"],"properties":{"type":{"const":"rename_owned_layer"},"layerId":{"type":"string","minLength":1,"maxLength":64},"name":{"type":"string","pattern":"^ArkheOS_[A-Za-z0-9_-]{1,48}$"}}},
+          {"type":"object","additionalProperties":false,"required":["type","layerId","opacity"],"properties":{"type":{"const":"set_opacity"},"layerId":{"type":"string","minLength":1,"maxLength":64},"opacity":{"type":"integer","minimum":0,"maximum":255}}},
+          {"type":"object","additionalProperties":false,"required":["type","layerId","visible"],"properties":{"type":{"const":"set_visibility"},"layerId":{"type":"string","minLength":1,"maxLength":64},"visible":{"type":"boolean"}}},
+          {"type":"object","additionalProperties":false,"required":["type","layerId","dx","dy"],"properties":{"type":{"const":"translate_owned_layer"},"layerId":{"type":"string","minLength":1,"maxLength":64},"dx":{"type":"integer","minimum":-512,"maximum":512},"dy":{"type":"integer","minimum":-512,"maximum":512}}}
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "codex-plugin-audit-evidence/v1",
+  "target": "C:\\Users\\rizek\\plugins\\krita-bridge",
+  "checks": [
+    {"name":"positive-prompts","passed":true,"evidence":"Seven deterministic package/protocol/admission/workflow/native tests pass. The real Krita 5.3.3 canary loads the isolated PyKrita extension, opens a native KRA, creates and translates an owned paint layer with deterministic proof pixels, saves, independently reads document/layer state, exports a nonempty PNG projection, reloads, and restores exact original bytes and revision."},
+    {"name":"negative-prompts","passed":true,"evidence":"The six closed schemas and runtime reject raw RPC, missing authentication, version drift, arbitrary Python/code/script/command/shell/payload/filter/action-id/raw-pixel fields, extra action fields, traversal, non-enrolled or non-KRA paths, dirty or stale documents, foreign layers, unsupported formats, and foreign receipts."},
+    {"name":"missing-context","passed":true,"evidence":"Mutation requires exact Krita 5.3.3/PyKrita identity, an enrolled saved KRA, active-document match, clean native state, exact revision, 1..32 admitted actions, and owned targets. Export additionally requires the exact current revision and bridge-owned destination."},
+    {"name":"failure-prompts","passed":true,"evidence":"Workflow and native canary exercise sealed checkpoint restoration. Rollback verifies receipt ownership, current post-state, checkpoint digest, copied pre-state bytes, native reopen, original revision/layer tree, and clean state; any mismatch stops with manual-recovery-required semantics."}
+  ]
+}

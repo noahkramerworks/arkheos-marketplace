@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "qgis-bridge/transaction/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["projectPath", "expectedRevision", "actions"],
+  "properties": {
+    "projectPath": {"type":"string","pattern":"^[A-Za-z]:\\\\.*\\.(qgs|qgz)$"},
+    "expectedRevision": {"type":"string","pattern":"^sha256:[a-f0-9]{64}$"},
+    "actions": {
+      "type": "array", "minItems": 1, "maxItems": 32,
+      "items": {
+        "oneOf": [
+          {"type":"object","additionalProperties":false,"required":["type","sourcePath","name"],"properties":{"type":{"const":"add_geojson_layer"},"sourcePath":{"type":"string","pattern":"^[A-Za-z]:\\\\.*\\.geojson$"},"name":{"type":"string","minLength":1,"maxLength":80}}},
+          {"type":"object","additionalProperties":false,"required":["type","layerId","color","width"],"properties":{"type":{"const":"set_single_symbol"},"layerId":{"type":"string","minLength":1,"maxLength":120},"color":{"type":"string","pattern":"^#[0-9A-Fa-f]{6}$"},"width":{"type":"number","exclusiveMinimum":0,"maximum":10}}},
+          {"type":"object","additionalProperties":false,"required":["type","layerId","name"],"properties":{"type":{"const":"rename_owned_layer"},"layerId":{"type":"string","minLength":1,"maxLength":120},"name":{"type":"string","minLength":1,"maxLength":80}}},
+          {"type":"object","additionalProperties":false,"required":["type","name"],"properties":{"type":{"const":"ensure_layout"},"name":{"type":"string","pattern":"^ArkheOS_[A-Za-z0-9_-]{1,48}$"}}},
+          {"type":"object","additionalProperties":false,"required":["type","layerId"],"properties":{"type":{"const":"remove_owned_layer"},"layerId":{"type":"string","minLength":1,"maxLength":120}}}
+        ]
+      }
+    }
+  }
+}
+

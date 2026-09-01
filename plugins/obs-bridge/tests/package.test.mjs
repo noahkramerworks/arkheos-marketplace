@@ -16,16 +16,27 @@ function pngInfo(relative) {
 test("package identity, contributions, and interface assets match the accepted design", () => {
   const manifest = json(".codex-plugin/plugin.json");
   assert.equal(manifest.name, "obs-bridge");
-  assert.equal(manifest.version, "0.1.2");
+  assert.equal(manifest.version, "0.2.0");
+  assert.equal(manifest.license, "Apache-2.0");
+  assert.equal(json("package.json").license, "Apache-2.0");
   assert.equal(manifest.skills, "./skills/");
   assert.equal(manifest.interface.logo, "./assets/logo.png");
   assert.equal(manifest.interface.composerIcon, "./assets/composer-icon.png");
   assert.deepEqual(readdirSync(path.join(root, "skills")).sort(), ["apply", "index", "inspect", "rollback"]);
   assert.deepEqual(Object.keys(json(".mcp.json").mcpServers), ["obs_bridge"]);
-  assert.equal(json("bridge/profile.json").schema, "bridge-profile/v1.1");
+  const profile = json("bridge/profile.json");
+  assert.equal(profile.schema, "bridge-profile/v1.2");
+  assert.equal(profile.pluginVersion, "0.2.0");
+  assert.equal(profile.controlSurface.kind, "native-protocol");
+  assert.equal(profile.certificationTiers[0], "api-contract-admission");
+  assert.deepEqual(profile.release.targets.map(({ marketplace, selector }) => ({ marketplace, selector })), [
+    { marketplace: "personal", selector: "obs-bridge@personal" },
+    { marketplace: "arkheos", selector: "obs-bridge@arkheos" },
+  ]);
   assert.deepEqual(pngInfo("assets/logo.png"), { width: 512, height: 512, colorType: 6 });
   assert.deepEqual(pngInfo("assets/composer-icon.png"), { width: 32, height: 32, colorType: 6 });
   assert.ok(existsSync(path.join(root, "assets/source/logo.svg")));
+  assert.ok(existsSync(path.join(root, "LICENSE")));
 });
 
 test("package has no product, billing, raw RPC, or native binary contributions", () => {
@@ -39,7 +50,7 @@ test("package has no product, billing, raw RPC, or native binary contributions",
   };
   walk(root);
   assert.equal(all.some((file) => /\.(dll|exe|node|so|dylib)$/i.test(file)), false);
-  assert.equal(all.some((file) => /vertical-stream|podcast|billing|entitlement/i.test(file)), false);
+  assert.equal(all.some((file) => /billing|entitlement/i.test(file)), false);
   const server = readFileSync(path.join(root, "mcp/server.mjs"), "utf8");
   assert.doesNotMatch(server, /raw_rpc\s*:/);
 });

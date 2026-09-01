@@ -1,0 +1,18 @@
+schema_version = "1.0.0"
+id = "blender_bridge"
+version = "0.2.0"
+name = "Blender Bridge"
+tagline = "Verified reversible DCC control for Codex"
+maintainer = "Rizek"
+type = "add-on"
+tags = ["Development"]
+blender_version_min = "5.2.1"
+license = ["SPDX:GPL-3.0-or-later"]
+platforms = ["windows-x64"]
+
+[permissions]
+network = "Poll an authenticated ephemeral loopback coordinator"
+files = "Read coordinator discovery and operate enrolled blend files"
+
+[build]
+paths_exclude_pattern = ["__pycache__/", "*.zip", "/.git/"]

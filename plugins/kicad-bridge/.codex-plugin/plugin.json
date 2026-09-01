@@ -1,0 +1,19 @@
+{
+  "name": "kicad-bridge",
+  "version": "0.1.0",
+  "description": "Certified native KiCad Bridge for inspection, bounded edits, export, and exact rollback.",
+  "author": {
+    "name": "Rizek"
+  },
+  "license": "Apache-2.0",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "KiCad Bridge",
+    "shortDescription": "Control KiCad through a certified native bridge.",
+    "developerName": "Rizek",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/composer-icon.png"
+  }
+}

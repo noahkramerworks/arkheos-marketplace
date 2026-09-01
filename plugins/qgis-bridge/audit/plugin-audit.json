@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "target": "C:\\Users\\rizek\\plugins\\qgis-bridge",
+  "design": "C:\\Users\\rizek\\plugins\\qgis-bridge\\design\\plugin.md",
+  "audited_at": "2026-08-31T23:06:03.045Z",
+  "checks": [
+    {
+      "name": "personal-interface-assets",
+      "status": "passed",
+      "detail": "Manifest and deterministic PNG assets match personal-png-v1"
+    },
+    {
+      "name": "instruction-graph",
+      "status": "passed",
+      "detail": "11 Markdown files and 4 linked files inspected"
+    },
+    {
+      "name": "mcp-declaration",
+      "status": "passed",
+      "detail": "1 MCP server declarations inspected"
+    },
+    {
+      "name": "nonempty-contained-source",
+      "status": "passed",
+      "detail": "Package files are nonempty and contained"
+    },
+    {
+      "name": "negative-tests",
+      "status": "passed",
+      "detail": "5 test files include negative/failure assertions"
+    },
+    {
+      "name": "positive-prompts",
+      "status": "passed",
+      "detail": "Deterministic package/protocol/admission/workflow tests and the real QGIS 4.2.0 canary pass; the canary loads PyQGIS, adds/styles an enrolled bridge-owned GeoJSON layer, creates a print layout, saves, independently reads project/layer/renderer/layout state, renders PNG, and restores exact bytes."
+    },
+    {
+      "name": "negative-prompts",
+      "status": "passed",
+      "detail": "The six closed schemas and runtime reject raw RPC, missing authentication, version drift, Python/code/script/command/shell/payload/SQL/expression/provider fields, extra action fields, traversal, non-enrolled paths, dirty or stale projects, foreign layers/layouts, unsupported formats, and foreign receipts."
+    },
+    {
+      "name": "missing-context",
+      "status": "passed",
+      "detail": "Mutation requires exact QGIS 4.2.0/API identity, enrolled saved project, active-project match, clean native state, exact revision, 1..32 admitted actions, owned targets, and a valid checkpoint. Export additionally requires an owned layout and bridge-owned destination."
+    },
+    {
+      "name": "failure-prompts",
+      "status": "passed",
+      "detail": "Workflow and native canary exercise sealed checkpoint restoration. Rollback verifies receipt ownership, current post-state, checkpoint digest, copied pre-state bytes, native reload, original revision, and clean state; any mismatch stops with manual-recovery-required semantics."
+    }
+  ],
+  "findings": [],
+  "final_result": "passed"
+}

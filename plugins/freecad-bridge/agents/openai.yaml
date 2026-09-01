@@ -1,0 +1,4 @@
+interface:
+  display_name: "FreeCAD Bridge"
+  short_description: "Control FreeCAD through a certified native bridge."
+  default_prompt: "Use the focused Skill that owns this request."

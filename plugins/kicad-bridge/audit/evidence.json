@@ -1,0 +1,26 @@
+{
+  "schema": "codex-plugin-audit-evidence/v1",
+  "target": "C:\\Users\\rizek\\plugins\\kicad-bridge",
+  "checks": [
+    {
+      "name": "positive-prompts",
+      "passed": true,
+      "evidence": "Six deterministic package, protocol, admission, workflow, MCP, and native tests pass. The real KiCad 10.0.5 canary launches an isolated PCB Editor, connects through the official version-bound IPC API, creates and moves owned board text, changes the title, saves, reconnects with an independent client for native-memory and saved-file readback, renders through separately bound kicad-cli 10.0.5, and restores the exact original bytes, memory digest, and revision."
+    },
+    {
+      "name": "negative-prompts",
+      "passed": true,
+      "evidence": "The six closed schemas and runtime reject raw RPC or protocol payloads, arbitrary code, scripts, commands, shell fields, extra fields, traversal, non-enrolled or non-board paths, unsupported actions or formats, invalid coordinates and ownership markers, stale revisions, dirty synchronized state, foreign checkpoints, and foreign receipts."
+    },
+    {
+      "name": "missing-context",
+      "passed": true,
+      "evidence": "Mutation requires the exact KiCad 10.0.5 PCB Editor, IPC schema, kicad-python runtime, and CLI identities; a prepared isolated profile; an enrolled saved board; the bridge-owned process and socket; a synchronized clean native-memory and saved-file pair; the exact current revision; and 1..32 admitted semantic actions."
+    },
+    {
+      "name": "failure-prompts",
+      "passed": true,
+      "evidence": "The workflow and native canary exercise immutable checkpoint and receipt restoration. Rollback refuses post-state drift before writing, verifies receipt and checkpoint identity, restores original board bytes, commands a native revert, independently rereads memory and file state, and requires exact original memory digest, file digest, revision, and clean synchronization."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "bridge-profile/v1.2",
+  "bridgeId": "krita-bridge",
+  "pluginVersion": "0.1.0",
+  "application": {
+    "name": "Krita 5.3.3",
+    "authority": ["Krita 5.3.3", "git 858d352"],
+    "executable": "C:\\Program Files\\Krita (x64)\\bin\\krita.exe",
+    "identityArtifacts": [
+      {"label":"krita-executable","path":"C:\\Program Files\\Krita (x64)\\bin\\krita.exe"},
+      {"label":"pykrita-library","path":"C:\\Program Files\\Krita (x64)\\lib\\krita-python-libs\\PyKrita\\krita.pyd"}
+    ]
+  },
+  "controlSurface": {
+    "kind": "documented-application-api",
+    "authority": "Krita 5.3.3 documented PyKrita API",
+    "version": "PyKrita 5.3.3 / Krita.instance().version() 5.3.3",
+    "contractArtifacts": [
+      {"label":"api-contract","path":"C:\\Users\\rizek\\plugins\\krita-bridge\\references\\krita-api-contract.md"},
+      {"label":"installed-pykrita-stub","path":"C:\\Program Files\\Krita (x64)\\lib\\krita-python-libs\\PyKrita\\krita.pyi"},
+      {"label":"installer-provenance","path":"C:\\Users\\rizek\\plugins\\krita-bridge\\references\\installer-provenance.md"}
+    ],
+    "exposure": "bridge-owned-authenticated-loopback",
+    "typedReads": ["application-identity","document-identity","document-dimensions","color-model","dirty-state","bounded-layer-tree"],
+    "typedWrites": ["create-owned-paint-layer","rename-owned-layer","set-owned-opacity","set-owned-visibility","translate-owned-layer"],
+    "admissionCommand": {"command":"node","args":["--test","tests/admission.test.mjs"],"cwd":"C:\\Users\\rizek\\plugins\\krita-bridge","timeoutMs":120000},
+    "independentReadback": true,
+    "exactRollback": true,
+    "controllerOnly": false,
+    "uiAutomation": false,
+    "screenScraping": false,
+    "rawPassthrough": false,
+    "exportOnly": false
+  },
+  "adapter": "reverse-polling-extension",
+  "adapterRoots": ["krita-extension"],
+  "sourceRoot": "C:\\Users\\rizek\\plugins\\krita-bridge",
+  "sourceProvenance": {"vcs":"git","requireClean":true,"digestPolicy":"bridge-source/v1"},
+  "stateRoot": "C:\\Users\\rizek\\.codex\\state\\plugins\\krita-bridge\\v1",
+  "compatibility": {"target":"Windows x86-64; Krita 5.3.3; PyKrita 5.3.3; bridge 0.1.0"},
+  "testCommands": [
+    {"command":"npm","args":["run","validate"],"cwd":"C:\\Users\\rizek\\plugins\\krita-bridge","timeoutMs":120000},
+    {"command":"npm","args":["run","test:live"],"cwd":"C:\\Users\\rizek\\plugins\\krita-bridge","timeoutMs":300000}
+  ],
+  "certificationTiers": ["api-contract-admission","package-design-audit","protocol-negative-tests","isolated-native-fixture","live-application-canary","rollback-recovery-discovery"],
+  "nativeCanary": {"command":{"command":"node","args":["scripts/live-canary.mjs"],"cwd":"C:\\Users\\rizek\\plugins\\krita-bridge","timeoutMs":300000},"independentReadback":true},
+  "rollback": {"receiptSchema":"krita-bridge/receipt/v1","exactBytes":true},
+  "release": {"targets":[
+    {"marketplace":"personal","selector":"krita-bridge@personal","license":"GPL-3.0-or-later","requiresCertificate":true,"freshTask":true},
+    {"marketplace":"arkheos","selector":"krita-bridge@arkheos","license":"GPL-3.0-or-later","requiresCertificate":true,"freshTask":true}
+  ]}
+}

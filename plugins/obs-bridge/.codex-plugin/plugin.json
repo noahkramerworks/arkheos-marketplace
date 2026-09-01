@@ -1,11 +1,11 @@
 {
   "name": "obs-bridge",
-  "version": "0.1.2",
-  "description": "Native, reversible OBS Studio control for Codex through obs-websocket.",
+  "version": "0.2.0",
+  "description": "Certified native, reversible OBS Studio control for Codex through obs-websocket.",
   "author": {
     "name": "Rizek"
   },
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "keywords": [
     "obs",
     "obs-websocket",
@@ -16,8 +16,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "OBS Bridge",
-    "shortDescription": "Inspect and control OBS with verified rollback",
-    "longDescription": "Inspect OBS Studio through its native WebSocket API, apply narrow scene and input plans, verify every effect by readback, and roll back only bridge-created resources.",
+    "shortDescription": "Certified OBS control with verified rollback",
+    "longDescription": "Inspect OBS Studio 32.2.1 through its bundled obs-websocket 5.7.4 protocol, apply narrow scene and input plans, verify every effect by readback, and roll back only bridge-created resources.",
     "developerName": "Rizek",
     "category": "Developer Tools",
     "capabilities": [

@@ -1,0 +1,19 @@
+{
+  "name": "reaper-bridge",
+  "version": "0.2.0",
+  "description": "Certified native REAPER bridge for inspection, revision-guarded edits, render, and exact rollback.",
+  "author": {
+    "name": "Rizek"
+  },
+  "license": "Apache-2.0",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "REAPER Bridge",
+    "shortDescription": "Control REAPER through a certified native bridge.",
+    "developerName": "Rizek",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/composer-icon.png"
+  }
+}

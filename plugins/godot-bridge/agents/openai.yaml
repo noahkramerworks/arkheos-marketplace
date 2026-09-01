@@ -1,0 +1,4 @@
+interface:
+  display_name: "Godot Bridge"
+  short_description: "Build games through verified native Godot operations"
+  default_prompt: "Use Godot Bridge as a reusable native boundary. Inspect before editing or exporting, require exact revisions, verify native or artifact readback, and keep game-specific product workflows and packaging outside this plugin."

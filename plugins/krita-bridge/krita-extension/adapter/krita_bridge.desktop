@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=Krita/PythonPlugin
+X-KDE-Library=arkheos_krita_bridge
+X-Python-2-Compatible=false
+Name=ArkheOS Krita Bridge
+Comment=Authenticated reverse-polling PyKrita bridge for closed semantic operations

@@ -1,0 +1,13 @@
+[general]
+name=ArkheOS QGIS Bridge
+description=Bridge-owned authenticated reverse-polling PyQGIS adapter
+version=0.1.0
+qgisMinimumVersion=4.2
+qgisMaximumVersion=4.2.99
+author=Rizek
+email=
+about=Closed semantic QGIS bridge; no eval, Processing, SQL, raw protocol, or UI automation surface.
+category=Plugins
+experimental=False
+deprecated=False
+

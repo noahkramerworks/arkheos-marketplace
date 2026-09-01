@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "krita-bridge/receipt/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema","documentPath","preSha256","postSha256","checkpointPath","preRevision","postRevision","actions","createdAt","receiptId"],
+  "properties": {
+    "schema": {"const":"krita-bridge/receipt/v1"},
+    "documentPath": {"type":"string"},
+    "preSha256": {"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "postSha256": {"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "checkpointPath": {"type":"string"},
+    "preRevision": {"type":"string","pattern":"^sha256:[a-f0-9]{64}$"},
+    "postRevision": {"type":"string","pattern":"^sha256:[a-f0-9]{64}$"},
+    "actions": {"type":"array","minItems":1},
+    "createdAt": {"type":"string","format":"date-time"},
+    "receiptId": {"type":"string","pattern":"^sha256:[a-f0-9]{64}$"}
+  }
+}

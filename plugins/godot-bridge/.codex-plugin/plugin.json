@@ -1,0 +1,26 @@
+{
+  "name": "godot-bridge",
+  "version": "0.2.0",
+  "description": "Native, reversible Godot editor, playtest, and verified export control for Codex.",
+  "author": {
+    "name": "Rizek"
+  },
+  "license": "Apache-2.0",
+  "keywords": ["godot", "game-development", "bridge", "editor", "reversible"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Godot Bridge",
+    "shortDescription": "Build games through verified native Godot operations",
+    "developerName": "Rizek",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "defaultPrompt": [
+      "Inspect a Godot installation, project, or export preset",
+      "Enroll a project and apply a reversible scene transaction",
+      "Playtest, export, or roll back a verified Godot workflow"
+    ],
+    "brandColor": "#478CBF",
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/composer-icon.png"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "schema": "bridge-template-provenance/v1",
+  "adapter": "protocol-only",
+  "templateDigest": "3119091e90d97dd2f756be30bc54a808782a297db0c211701734cee2127d72ce",
+  "runtimeDependency": false
+}

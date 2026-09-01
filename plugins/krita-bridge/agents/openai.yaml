@@ -1,0 +1,4 @@
+interface:
+  display_name: "Krita Bridge"
+  short_description: "Control Krita through a certified native bridge."
+  default_prompt: "Use the focused Skill that owns this request."

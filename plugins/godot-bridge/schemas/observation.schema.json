@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "godot-bridge/observation/v1",
+  "type": "object",
+  "required": ["schema", "status", "projectRoot", "revision", "connected"],
+  "properties": {
+    "schema": {"const": "godot-bridge/observation/v1"},
+    "status": {"enum": ["observed", "disconnected"]},
+    "projectRoot": {"type": "string"},
+    "revision": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "connected": {"type": "boolean"},
+    "dirty": {"type": "boolean"},
+    "engine": {"type": "object"},
+    "editor": {"type": "object"},
+    "scene": {"type": ["object", "null"]},
+    "scripts": {"type": "array"},
+    "resources": {"type": "array"},
+    "diagnostics": {"type": "array"},
+    "playtest": {"type": ["object", "null"]},
+    "nextCursor": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}

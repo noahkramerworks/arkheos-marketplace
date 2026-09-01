@@ -1,6 +1,8 @@
 # OBS Bridge contract
 
-OBS is authoritative. The bridge may claim success only after a native request succeeds and a separate native readback proves the requested state.
+OBS Studio 32.2.1 is authoritative. The admitted control surface is its bundled obs-websocket 5.7.4 native protocol at RPC 1. The bridge may claim success only after a typed native request succeeds and a separate native readback proves the requested state.
+
+Admission requires non-empty typed reads and writes, independent readback, and exact restoration. Controller-only access, UI automation, screen scraping, raw request passthrough, export-only behavior, arbitrary code or commands, unrestricted paths, and command-exit claims are rejected.
 
 The mutation pipeline is fixed:
 

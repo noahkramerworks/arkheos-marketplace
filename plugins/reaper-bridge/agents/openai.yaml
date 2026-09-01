@@ -1,0 +1,4 @@
+interface:
+  display_name: "REAPER Bridge"
+  short_description: "Control REAPER through a certified native bridge."
+  default_prompt: "Use the focused Skill that owns this request."

@@ -1,17 +1,37 @@
 {
-  "schema": "bridge-profile/v1.1",
+  "schema": "bridge-profile/v1.2",
   "bridgeId": "obs-bridge",
-  "pluginVersion": "0.1.2",
+  "pluginVersion": "0.2.0",
   "application": {"name": "OBS Studio", "authority": ["scenes", "inputs", "runtime"], "executable": "C:\\Program Files\\obs-studio\\bin\\64bit\\obs64.exe", "identityArtifacts": [{"label": "obs-executable", "path": "C:\\Program Files\\obs-studio\\bin\\64bit\\obs64.exe"}, {"label": "obs-websocket", "path": "C:\\Program Files\\obs-studio\\obs-plugins\\64bit\\obs-websocket.dll"}]},
+  "controlSurface": {
+    "kind": "native-protocol",
+    "authority": "OBS Studio bundled obs-websocket protocol",
+    "version": "OBS Studio 32.2.1 / obs-websocket 5.7.4 / RPC 1",
+    "contractArtifacts": [
+      {"label": "obs-websocket-protocol-module", "path": "C:\\Program Files\\obs-studio\\obs-plugins\\64bit\\obs-websocket.dll"},
+      {"label": "bridge-protocol-contract", "path": "C:\\Users\\rizek\\plugins\\obs-bridge\\references\\obs-protocol.md"}
+    ],
+    "exposure": "direct-native-endpoint",
+    "typedReads": ["inspect-version", "inspect-scenes", "inspect-inputs", "inspect-video-settings"],
+    "typedWrites": ["ensure-scene", "ensure-input", "rollback-receipt"],
+    "admissionCommand": {"command": "npm.cmd", "args": ["run", "test:admission"], "cwd": "C:\\Users\\rizek\\plugins\\obs-bridge", "timeoutMs": 300000},
+    "independentReadback": true,
+    "exactRollback": true,
+    "controllerOnly": false,
+    "uiAutomation": false,
+    "screenScraping": false,
+    "rawPassthrough": false,
+    "exportOnly": false
+  },
   "adapter": "protocol-only",
   "adapterRoots": ["mcp"],
   "sourceRoot": "C:\\Users\\rizek\\plugins\\obs-bridge",
   "sourceProvenance": {"vcs": "git", "requireClean": true, "digestPolicy": "bridge-source/v1"},
   "stateRoot": "C:\\Users\\rizek\\.codex\\state\\plugins\\obs-bridge\\v1",
-  "compatibility": {"target": "OBS Studio 32.2.1 with obs-websocket 5.x"},
-  "testCommands": [{"command": "npm.cmd", "args": ["test"], "cwd": "C:\\Users\\rizek\\plugins\\obs-bridge", "timeoutMs": 300000}, {"command": "npm.cmd", "args": ["run", "test:live"], "cwd": "C:\\Users\\rizek\\plugins\\obs-bridge", "timeoutMs": 300000}],
-  "certificationTiers": ["package-design-audit", "protocol-negative-tests", "isolated-native-fixture", "live-application-canary", "rollback-recovery-discovery"],
+  "compatibility": {"target": "OBS Studio 32.2.1 with bundled obs-websocket 5.7.4 / RPC 1"},
+  "testCommands": [{"command": "npm.cmd", "args": ["test"], "cwd": "C:\\Users\\rizek\\plugins\\obs-bridge", "timeoutMs": 300000}, {"command": "npm.cmd", "args": ["run", "test:admission"], "cwd": "C:\\Users\\rizek\\plugins\\obs-bridge", "timeoutMs": 300000}, {"command": "npm.cmd", "args": ["run", "test:live"], "cwd": "C:\\Users\\rizek\\plugins\\obs-bridge", "timeoutMs": 300000}],
+  "certificationTiers": ["api-contract-admission", "package-design-audit", "protocol-negative-tests", "isolated-native-fixture", "live-application-canary", "rollback-recovery-discovery"],
   "nativeCanary": {"command": {"command": "npm.cmd", "args": ["run", "test:live"], "cwd": "C:\\Users\\rizek\\plugins\\obs-bridge", "timeoutMs": 300000}, "independentReadback": true},
   "rollback": {"receiptSchema": "obs-bridge/receipt/v1", "exactBytes": true},
-  "release": {"marketplace": "personal", "requiresCertificate": true, "freshTask": true}
+  "release": {"targets": [{"marketplace": "personal", "selector": "obs-bridge@personal", "license": "Apache-2.0", "requiresCertificate": true, "freshTask": true}, {"marketplace": "arkheos", "selector": "obs-bridge@arkheos", "license": "Apache-2.0", "requiresCertificate": true, "freshTask": true}]}
 }

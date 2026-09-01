@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "reaper-bridge/transaction/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["projectPath", "expectedRevision", "actions"],
+  "properties": {
+    "projectPath": {"type": "string", "pattern": "^[A-Za-z]:\\\\.*\\.rpp$"},
+    "expectedRevision": {"type": "integer", "minimum": 0},
+    "actions": {
+      "type": "array", "minItems": 1, "maxItems": 32,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "index"],
+            "properties": {
+              "type": {"const": "create_track"},
+              "index": {"type": "integer", "minimum": 0, "maximum": 4096},
+              "name": {"type": "string", "minLength": 1, "maxLength": 240}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "index", "name"],
+            "properties": {
+              "type": {"const": "rename_track"},
+              "index": {"type": "integer", "minimum": 0, "maximum": 4096},
+              "name": {"type": "string", "minLength": 1, "maxLength": 240}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "index", "value"],
+            "properties": {
+              "type": {"const": "set_track_volume"},
+              "index": {"type": "integer", "minimum": 0, "maximum": 4096},
+              "value": {"type": "number", "minimum": 0, "maximum": 4}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "index", "value"],
+            "properties": {
+              "type": {"const": "set_track_pan"},
+              "index": {"type": "integer", "minimum": 0, "maximum": 4096},
+              "value": {"type": "number", "minimum": -1, "maximum": 1}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "index", "value"],
+            "properties": {
+              "type": {"const": "set_track_mute"},
+              "index": {"type": "integer", "minimum": 0, "maximum": 4096},
+              "value": {"type": "boolean"}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "index", "fx"],
+            "properties": {
+              "type": {"const": "add_stock_fx"},
+              "index": {"type": "integer", "minimum": 0, "maximum": 4096},
+              "fx": {"enum": ["ReaEQ", "ReaComp", "ReaGate", "ReaLimit", "ReaDelay"]}
+            }
+          }
+        ]
+      }
+    }
+  }
+}

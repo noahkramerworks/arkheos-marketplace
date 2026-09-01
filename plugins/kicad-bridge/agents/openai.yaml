@@ -1,0 +1,4 @@
+interface:
+  display_name: "KiCad Bridge"
+  short_description: "Control KiCad through a certified native bridge."
+  default_prompt: "Route KiCad work to the focused bridge Skill that owns setup, inspection, editing, export, rollback, or recovery."

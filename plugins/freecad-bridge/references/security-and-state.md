@@ -1,0 +1,3 @@
+# Security and state
+
+The coordinator binds only `127.0.0.1`, uses a new 256-bit bearer token, caps request bodies at 2 MiB, and writes the endpoint/token descriptor beneath bridge-owned state. The extension installs only beneath FreeCAD 1.1's observed user module root `%APPDATA%\\FreeCAD\\v1-1\\Mod\\ArkheOSFreeCADBridge`, accepts a fixed identity and operation set, and has no eval path. Document paths must resolve inside an enrolled root or bridge state; exports must resolve beneath the bridge export directory. Owned extension files, checkpoints, receipts, process records, enrollments, and runtime descriptors have separate state subdirectories. Foreign extension files, objects, receipts, checkpoints, and processes stop closed.

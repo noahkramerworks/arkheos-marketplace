@@ -1,0 +1,26 @@
+{
+  "name": "blender-bridge",
+  "version": "0.2.0",
+  "description": "Certified native, reversible Blender 5.2.1 DCC control through a typed extension and verified coordinator.",
+  "author": {
+    "name": "Rizek"
+  },
+  "license": "GPL-3.0-or-later",
+  "keywords": ["blender", "dcc", "3d", "bridge", "reversible"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Blender Bridge",
+    "shortDescription": "Build 3D scenes through verified native Blender operations",
+    "developerName": "Rizek",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "defaultPrompt": [
+      "Inspect Blender or an enrolled .blend project",
+      "Apply a typed reversible Blender transaction",
+      "Render, capture, export, or roll back verified Blender work"
+    ],
+    "brandColor": "#E87D0D",
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/composer-icon.png"
+  }
+}

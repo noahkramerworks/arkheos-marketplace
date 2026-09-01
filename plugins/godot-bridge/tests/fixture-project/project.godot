@@ -1,0 +1,18 @@
+; Engine configuration file.
+; Godot Bridge fixture project.
+
+config_version=5
+
+[application]
+
+config/name="Godot Bridge Fixture"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

@@ -1,4 +1,4 @@
 interface:
   display_name: "OBS Bridge"
-  short_description: "Inspect and control OBS with verified rollback"
-  default_prompt: "Use OBS Bridge as a reusable native boundary. Inspect before mutating, apply only typed scene plans, verify effects through independent OBS readback, and keep customer-product workflows outside this plugin."
+  short_description: "Certified OBS control with verified rollback"
+  default_prompt: "Use OBS Bridge as the certified OBS Studio 32.2.1 / obs-websocket 5.7.4 native boundary. Inspect before mutating, apply only typed scene plans, verify effects through independent OBS readback, and keep customer-product workflows outside this plugin."

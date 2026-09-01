@@ -12,7 +12,7 @@ export class MockObs {
     this.closed = false;
     this.version = {
       obsVersion: "32.2.1",
-      obsWebSocketVersion: "5.7.0",
+      obsWebSocketVersion: "5.7.4",
       rpcVersion: 1,
       availableRequests: [...new Set(contracts.APPLY_REQUESTS)],
     };

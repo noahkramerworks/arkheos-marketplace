@@ -1,0 +1,10 @@
+{
+  "schema": "codex-plugin-audit-evidence/v1",
+  "target": "C:\\Users\\rizek\\plugins\\qgis-bridge",
+  "checks": [
+    {"name":"positive-prompts","passed":true,"evidence":"Deterministic package/protocol/admission/workflow tests and the real QGIS 4.2.0 canary pass; the canary loads PyQGIS, adds/styles an enrolled bridge-owned GeoJSON layer, creates a print layout, saves, independently reads project/layer/renderer/layout state, renders PNG, and restores exact bytes."},
+    {"name":"negative-prompts","passed":true,"evidence":"The six closed schemas and runtime reject raw RPC, missing authentication, version drift, Python/code/script/command/shell/payload/SQL/expression/provider fields, extra action fields, traversal, non-enrolled paths, dirty or stale projects, foreign layers/layouts, unsupported formats, and foreign receipts."},
+    {"name":"missing-context","passed":true,"evidence":"Mutation requires exact QGIS 4.2.0/API identity, enrolled saved project, active-project match, clean native state, exact revision, 1..32 admitted actions, owned targets, and a valid checkpoint. Export additionally requires an owned layout and bridge-owned destination."},
+    {"name":"failure-prompts","passed":true,"evidence":"Workflow and native canary exercise sealed checkpoint restoration. Rollback verifies receipt ownership, current post-state, checkpoint digest, copied pre-state bytes, native reload, original revision, and clean state; any mismatch stops with manual-recovery-required semantics."}
+  ]
+}

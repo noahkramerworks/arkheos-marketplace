@@ -8,7 +8,7 @@ class FakeWebSocket {
   constructor(_endpoint) {
     this.listeners = new Map();
     this.sent = [];
-    queueMicrotask(() => this.emit("message", { data: JSON.stringify({ op: 0, d: { obsStudioVersion: "32.2.1", obsWebSocketVersion: "5.7.0", rpcVersion: 1, authentication: { salt: "salt", challenge: "challenge" } } }) }));
+    queueMicrotask(() => this.emit("message", { data: JSON.stringify({ op: 0, d: { obsStudioVersion: "32.2.1", obsWebSocketVersion: "5.7.4", rpcVersion: 1, authentication: { salt: "salt", challenge: "challenge" } } }) }));
   }
 
   addEventListener(name, listener) {
@@ -54,6 +54,7 @@ test("authentication fails closed when the password is absent", async () => {
 test("MCP server exposes exactly three tools and bounded protocol errors", async () => {
   const initialized = await handleRpc({ jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-06-18" } });
   assert.equal(initialized.result.serverInfo.name, "obs-bridge");
+  assert.equal(initialized.result.serverInfo.version, "0.2.0");
   const listed = await handleRpc({ jsonrpc: "2.0", id: 2, method: "tools/list" });
   assert.deepEqual(listed.result.tools.map((tool) => tool.name), ["inspect", "apply_scene_plan", "rollback_receipt"]);
   assert.equal(TOOLS.length, 3);

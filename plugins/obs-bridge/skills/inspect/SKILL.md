@@ -9,4 +9,4 @@ Read [OBS protocol](../../references/obs-protocol.md) and [state and security](.
 
 Call the bundled `obs_bridge.inspect` MCP tool. Supply `endpoint` only when the user selected a non-default loopback address. Never request or place a password in tool input; authentication comes from `OBS_WEBSOCKET_PASSWORD`.
 
-Report OBS Studio version, obs-websocket version, RPC version, required-request availability, bounded scenes and inputs, and video settings. Treat missing OBS, closed WebSocket, authentication failure, timeout, or missing request support as observed boundaries. Do not start OBS or change configuration unless the user also requested setup or operation.
+Report OBS Studio version, obs-websocket version, RPC version, required-request availability, bounded scenes and inputs, and video settings. This release is admitted only for OBS Studio 32.2.1 with obs-websocket 5.7.4 / RPC 1; version drift blocks certification and should be reported explicitly. Treat missing OBS, closed WebSocket, authentication failure, timeout, or missing request support as observed boundaries. Do not start OBS or change configuration unless the user also requested setup or operation.

@@ -207,7 +207,7 @@ async function rollbackCreated(client, created) {
 function receiptBody({ plan, endpoint, observation, preStateFingerprint, created, reused, effects, status, classification, rollback = null, error = null }) {
   return {
     schema: "obs-bridge/receipt/v1",
-    pluginVersion: "0.1.2",
+    pluginVersion: "0.2.0",
     planId: plan.planId,
     status,
     classification,
@@ -350,7 +350,7 @@ export async function rollbackReceipt(args, options = {}) {
     }
     const rollbackBody = {
       schema: "obs-bridge/receipt/v1",
-      pluginVersion: "0.1.2",
+      pluginVersion: "0.2.0",
       planId: `rollback:${source.receiptId}`,
       status: uncertain ? "manual-recovery-required" : "rolled-back",
       classification: "explicit-rollback",

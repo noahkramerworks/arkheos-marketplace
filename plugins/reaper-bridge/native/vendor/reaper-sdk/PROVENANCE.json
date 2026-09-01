@@ -1,0 +1,9 @@
+{
+  "schema": "reaper-bridge/vendor-source/v1",
+  "name": "REAPER C/C++ extension plug-in mini-SDK",
+  "source": "https://github.com/justinfrankel/reaper-sdk",
+  "commit": "490ded57668727fba21482fabc50ba9853a457bb",
+  "files": ["LICENSE", "reaper_plugin.h", "reaper_plugin_functions.h"],
+  "retrievedAt": "2026-08-31"
+}
+

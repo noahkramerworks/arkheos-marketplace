@@ -1,0 +1,54 @@
+{
+  "schema": "bridge-profile/v1.2",
+  "bridgeId": "kicad-bridge",
+  "pluginVersion": "0.1.0",
+  "application": {
+    "name": "KiCad 10.0.5 PCB Editor",
+    "authority": ["KiCad 10.0.5", "pcbnew.exe 10.0.5.50609"],
+    "executable": "C:\\Users\\rizek\\AppData\\Local\\Programs\\KiCad\\10.0\\bin\\pcbnew.exe",
+    "identityArtifacts": [
+      {"label":"pcbnew-executable","path":"C:\\Users\\rizek\\AppData\\Local\\Programs\\KiCad\\10.0\\bin\\pcbnew.exe"},
+      {"label":"kicad-cli-executable","path":"C:\\Users\\rizek\\AppData\\Local\\Programs\\KiCad\\10.0\\bin\\kicad-cli.exe"},
+      {"label":"bundled-python-executable","path":"C:\\Users\\rizek\\AppData\\Local\\Programs\\KiCad\\10.0\\bin\\python.exe"}
+    ]
+  },
+  "controlSurface": {
+    "kind": "documented-application-api",
+    "authority": "KiCad 10.0.5 protobuf/NNG IPC API via official kicad-python 0.7.1",
+    "version": "KiCad 10.0.5 / kicad-python 0.7.1 / API build 10.0.1-0-g2db9e5a72b",
+    "contractArtifacts": [
+      {"label":"installed-ipc-schema","path":"C:\\Users\\rizek\\AppData\\Local\\Programs\\KiCad\\10.0\\share\\kicad\\schemas\\api.v1.schema.json"},
+      {"label":"api-contract","path":"C:\\Users\\rizek\\plugins\\kicad-bridge\\references\\kicad-api-contract.md"},
+      {"label":"dependency-provenance","path":"C:\\Users\\rizek\\plugins\\kicad-bridge\\references\\dependency-provenance.md"},
+      {"label":"vendored-wheel-manifest","path":"C:\\Users\\rizek\\plugins\\kicad-bridge\\kicad-adapter\\vendor\\PROVENANCE.json"}
+    ],
+    "exposure": "direct-native-endpoint",
+    "typedReads": ["application-identity","open-board-identity","saved-board-digest","board-counts","title-block","layer-inventory","footprint-inventory","track-via-counts","board-text","selection"],
+    "typedWrites": ["create-owned-text","move-owned-text","set-title-block-title","delete-owned-text"],
+    "admissionCommand": {"command":"node","args":["--test","tests/admission.test.mjs"],"cwd":"C:\\Users\\rizek\\plugins\\kicad-bridge","timeoutMs":120000},
+    "independentReadback": true,
+    "exactRollback": true,
+    "controllerOnly": false,
+    "uiAutomation": false,
+    "screenScraping": false,
+    "rawPassthrough": false,
+    "exportOnly": false
+  },
+  "adapter": "protocol-only",
+  "adapterRoots": ["kicad-adapter"],
+  "sourceRoot": "C:\\Users\\rizek\\plugins\\kicad-bridge",
+  "sourceProvenance": {"vcs":"git","requireClean":true,"digestPolicy":"bridge-source/v1"},
+  "stateRoot": "C:\\Users\\rizek\\.codex\\state\\plugins\\kicad-bridge\\v1",
+  "compatibility": {"target":"Windows x86-64; KiCad 10.0.5; kicad-python 0.7.1; bridge 0.1.0"},
+  "testCommands": [
+    {"command":"npm","args":["run","validate"],"cwd":"C:\\Users\\rizek\\plugins\\kicad-bridge","timeoutMs":120000},
+    {"command":"npm","args":["run","test:live"],"cwd":"C:\\Users\\rizek\\plugins\\kicad-bridge","timeoutMs":300000}
+  ],
+  "certificationTiers": ["api-contract-admission","package-design-audit","protocol-negative-tests","isolated-native-fixture","live-application-canary","rollback-recovery-discovery"],
+  "nativeCanary": {"command":{"command":"node","args":["scripts/live-canary.mjs"],"cwd":"C:\\Users\\rizek\\plugins\\kicad-bridge","timeoutMs":300000},"independentReadback":true},
+  "rollback": {"receiptSchema":"kicad-bridge/receipt/v1","exactBytes":true},
+  "release": {"targets":[
+    {"marketplace":"personal","selector":"kicad-bridge@personal","license":"Apache-2.0","requiresCertificate":true,"freshTask":true},
+    {"marketplace":"arkheos","selector":"kicad-bridge@arkheos","license":"Apache-2.0","requiresCertificate":true,"freshTask":true}
+  ]}
+}

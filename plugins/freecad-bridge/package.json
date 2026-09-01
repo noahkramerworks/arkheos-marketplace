@@ -1,0 +1,13 @@
+{
+  "name": "freecad-bridge-personal",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node --test tests/package.test.mjs tests/protocol.test.mjs tests/admission.test.mjs tests/workflow.test.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:admission": "node --test tests/admission.test.mjs",
+    "test:live": "node --test tests/live-native.test.mjs"
+  }
+}

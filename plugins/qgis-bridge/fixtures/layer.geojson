@@ -1,0 +1,10 @@
+{
+  "type": "FeatureCollection",
+  "name": "ArkheOS Route",
+  "crs": {"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},
+  "features": [
+    {"type":"Feature","properties":{"name":"North Link"},"geometry":{"type":"LineString","coordinates":[[-73.998,40.720],[-73.992,40.726],[-73.985,40.724]]}},
+    {"type":"Feature","properties":{"name":"South Link"},"geometry":{"type":"LineString","coordinates":[[-73.999,40.716],[-73.991,40.713],[-73.983,40.718]]}}
+  ]
+}
+

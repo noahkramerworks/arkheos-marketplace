@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "target": "C:\\Users\\rizek\\plugins\\reaper-bridge",
+  "design": "C:\\Users\\rizek\\plugins\\reaper-bridge\\design\\plugin.md",
+  "audited_at": "2026-08-31T21:25:03.267Z",
+  "checks": [
+    {
+      "name": "personal-interface-assets",
+      "status": "passed",
+      "detail": "Manifest and deterministic PNG assets match personal-png-v1"
+    },
+    {
+      "name": "instruction-graph",
+      "status": "passed",
+      "detail": "6 Markdown files and 0 linked files inspected"
+    },
+    {
+      "name": "mcp-declaration",
+      "status": "passed",
+      "detail": "1 MCP server declarations inspected"
+    },
+    {
+      "name": "nonempty-contained-source",
+      "status": "passed",
+      "detail": "Package files are nonempty and contained"
+    },
+    {
+      "name": "negative-tests",
+      "status": "passed",
+      "detail": "5 test files include negative/failure assertions"
+    },
+    {
+      "name": "fresh-task-continuity",
+      "status": "passed",
+      "detail": "Root recovery entrypoint inspected"
+    },
+    {
+      "name": "positive-prompts",
+      "status": "passed",
+      "detail": "Ten passing automated checks include the v1.2 API-admission suite and a live REAPER 7.79 canary through the compiled 0.2.0 extension: exact API identity, native inspection, saved-project transaction, independent RPP readback, and exact rollback."
+    },
+    {
+      "name": "negative-prompts",
+      "status": "passed",
+      "detail": "Protocol, admission, and workflow tests reject missing bearer authentication, malformed or version-drifted native identities, unknown raw RPC, raw commands, code, scripts, protocol payloads, credentials, extra action fields, dirty projects, stale revisions, and foreign FX."
+    },
+    {
+      "name": "missing-context",
+      "status": "passed",
+      "detail": "Mutation requires REAPER 7.79, bridge 0.2.0, API 0x20E, the pinned SDK commit, an authenticated connection, absolute saved RPP path, exact observed revision, clean state, admitted action fields, and an owned checkpoint; omission or drift stops closed."
+    },
+    {
+      "name": "failure-prompts",
+      "status": "passed",
+      "detail": "The live canary exercised native undo plus sealed-checkpoint fallback and byte-for-byte restoration. The deterministic admission fixture also proved immutable receipt recovery and exact saved-project restoration without deleting evidence."
+    }
+  ],
+  "findings": [],
+  "final_result": "passed"
+}

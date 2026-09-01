@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "target": "C:\\Users\\rizek\\plugins\\godot-bridge",
+  "design": "C:\\Users\\rizek\\plugins\\godot-bridge\\design\\plugin.md",
+  "audited_at": "2026-08-31T19:41:11.618Z",
+  "checks": [
+    {
+      "name": "personal-interface-assets",
+      "status": "passed",
+      "detail": "Manifest and deterministic PNG assets match personal-png-v1"
+    },
+    {
+      "name": "instruction-graph",
+      "status": "passed",
+      "detail": "14 Markdown files and 13 linked files inspected"
+    },
+    {
+      "name": "mcp-declaration",
+      "status": "passed",
+      "detail": "1 MCP server declarations inspected"
+    },
+    {
+      "name": "nonempty-contained-source",
+      "status": "passed",
+      "detail": "Package files are nonempty and contained"
+    },
+    {
+      "name": "negative-tests",
+      "status": "passed",
+      "detail": "5 test files include negative/failure assertions"
+    },
+    {
+      "name": "fresh-task-continuity",
+      "status": "passed",
+      "detail": "Root recovery entrypoint inspected"
+    },
+    {
+      "name": "positive-prompts",
+      "status": "passed",
+      "detail": "Nineteen package, protocol, workflow, export, and addon tests passed. The fixed Godot 4.7 admission probe performed a real typed scene write, separate-process semantic readback, immutable receipt rollback, and exact restoration. The native suite also playtested, captured a debugger viewport, and built a hashed Windows export."
+    },
+    {
+      "name": "negative-prompts",
+      "status": "passed",
+      "detail": "Tests reject raw_rpc and unsupported actions, arbitrary variant tags, forward aliases, unsafe or traversing paths, unauthenticated coordinator access, stale revisions, malformed presets, export collisions, reparse output paths, changed owned addon files, and invalid native outputs."
+    },
+    {
+      "name": "missing-context",
+      "status": "passed",
+      "detail": "The tool server returns bounded rejected results when required project, enrollment, revision, run, receipt, preset, engine, coordinator, or output context is absent. No fallback to UI automation, raw protocol, shell, or a guessed path exists."
+    },
+    {
+      "name": "failure-prompts",
+      "status": "passed",
+      "detail": "Transaction failure prepares native state, restores checkpoint bytes, reloads the exact scene when connected, verifies the restored revision, and records manual-recovery-required when certainty is unavailable. Export failures remove only owned staging and never overwrite a target; foreign addon or receipt drift fails closed."
+    }
+  ],
+  "findings": [],
+  "final_result": "passed"
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "codex-plugin-audit-evidence/v1",
+  "target": "C:\\Users\\rizek\\plugins\\freecad-bridge",
+  "checks": [
+    {
+      "name": "positive-prompts",
+      "passed": true,
+      "evidence": "Six deterministic package/protocol/admission/workflow tests passed. The real FreeCAD 1.1.3 canary loaded the bridge-owned GUI extension, inspected a clean saved FCStd, changed one owned Part::Box Length through the native Python API, independently read back the recomputed dimension and saved hash, exported nonempty STEP and STL artifacts through the fixed FreeCADCmd adapter, and restored exact pre-state bytes."
+    },
+    {
+      "name": "negative-prompts",
+      "passed": true,
+      "evidence": "The six tool schemas are closed; admission and protocol tests reject unknown raw RPC, missing bearer auth, version drift, raw code/script/command/shell/payload/macro/module/generic-property fields, extra action fields, invalid object namespaces, non-enrolled paths, dirty or stale documents, foreign features, unsupported export formats, and foreign receipts."
+    },
+    {
+      "name": "missing-context",
+      "passed": true,
+      "evidence": "Mutation requires the exact connected FreeCAD 1.1.3/build/API identity, an enrolled existing absolute FCStd, active-document match, clean native state, exact sha256 revision, 1..32 admitted actions, owned targets, and a valid checkpoint. Export additionally requires a supported format and bridge-owned destination. Every omitted or drifted prerequisite stops closed."
+    },
+    {
+      "name": "failure-prompts",
+      "passed": true,
+      "evidence": "The workflow fixture and native canary both exercised sealed checkpoint restoration. Rollback verifies receipt ownership, current post-state, checkpoint digest, copied pre-state bytes, native reload, original native revision, and clean state. Any mismatch returns manual-recovery-required semantics without deleting or rewriting evidence."
+    }
+  ]
+}

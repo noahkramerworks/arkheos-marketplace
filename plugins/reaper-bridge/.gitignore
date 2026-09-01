@@ -1,0 +1,5 @@
+node_modules/
+native/build/
+native/*.exp
+native/*.lib
+*.log

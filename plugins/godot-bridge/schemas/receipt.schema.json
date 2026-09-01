@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "godot-bridge/receipt/v1",
+  "type": "object",
+  "required": ["schema", "receiptId", "status", "classification", "projectRoot", "createdAt"],
+  "properties": {
+    "schema": {"const": "godot-bridge/receipt/v1"},
+    "receiptId": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "status": {"enum": ["verified", "rolled-back", "already-restored", "manual-recovery-required", "rejected"]},
+    "classification": {"type": "string"},
+    "projectRoot": {"type": "string"},
+    "createdAt": {"type": "string"},
+    "preRevision": {"type": ["string", "null"]},
+    "postRevision": {"type": ["string", "null"]},
+    "changedTargets": {"type": "array", "items": {"type": "string"}},
+    "checkpoints": {"type": "array"},
+    "nativeReadback": {"type": ["object", "null"]},
+    "rollback": {"type": ["object", "null"]}
+  },
+  "additionalProperties": true
+}

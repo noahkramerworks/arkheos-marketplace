@@ -1,0 +1,26 @@
+{
+  "schema": "codex-plugin-audit-evidence/v1",
+  "target": "C:\\Users\\rizek\\plugins\\godot-bridge",
+  "checks": [
+    {
+      "name": "positive-prompts",
+      "passed": true,
+      "evidence": "Nineteen package, protocol, workflow, export, and addon tests passed. The fixed Godot 4.7 admission probe performed a real typed scene write, separate-process semantic readback, immutable receipt rollback, and exact restoration. The native suite also playtested, captured a debugger viewport, and built a hashed Windows export."
+    },
+    {
+      "name": "negative-prompts",
+      "passed": true,
+      "evidence": "Tests reject raw_rpc and unsupported actions, arbitrary variant tags, forward aliases, unsafe or traversing paths, unauthenticated coordinator access, stale revisions, malformed presets, export collisions, reparse output paths, changed owned addon files, and invalid native outputs."
+    },
+    {
+      "name": "missing-context",
+      "passed": true,
+      "evidence": "The tool server returns bounded rejected results when required project, enrollment, revision, run, receipt, preset, engine, coordinator, or output context is absent. No fallback to UI automation, raw protocol, shell, or a guessed path exists."
+    },
+    {
+      "name": "failure-prompts",
+      "passed": true,
+      "evidence": "Transaction failure prepares native state, restores checkpoint bytes, reloads the exact scene when connected, verifies the restored revision, and records manual-recovery-required when certainty is unavailable. Export failures remove only owned staging and never overwrite a target; foreign addon or receipt drift fails closed."
+    }
+  ]
+}

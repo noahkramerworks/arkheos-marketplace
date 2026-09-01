@@ -1,0 +1,52 @@
+{
+  "schema": "bridge-profile/v1.2",
+  "bridgeId": "qgis-bridge",
+  "pluginVersion": "0.1.0",
+  "application": {
+    "name": "QGIS 4.2.0",
+    "authority": ["QGIS 4.2.0-Belém do Pará", "QGIS_VERSION_INT 40200"],
+    "executable": "C:\\Users\\rizek\\AppData\\Local\\Programs\\QGIS-4.2.0\\QGIS 4.2.0\\bin\\qgis-bin.exe",
+    "identityArtifacts": [
+      {"label":"qgis-executable","path":"C:\\Users\\rizek\\AppData\\Local\\Programs\\QGIS-4.2.0\\QGIS 4.2.0\\bin\\qgis-bin.exe"}
+    ]
+  },
+  "controlSurface": {
+    "kind": "documented-application-api",
+    "authority": "QGIS 4.2.0 documented PyQGIS application API",
+    "version": "QGIS 4.2.0-Belém do Pará / QGIS_VERSION_INT 40200",
+    "contractArtifacts": [
+      {"label":"api-contract","path":"C:\\Users\\rizek\\plugins\\qgis-bridge\\references\\qgis-api-contract.md"},
+      {"label":"installed-pyqgis-core","path":"C:\\Users\\rizek\\AppData\\Local\\Programs\\QGIS-4.2.0\\QGIS 4.2.0\\apps\\qgis\\python\\qgis\\core\\__init__.py"},
+      {"label":"installer-provenance","path":"C:\\Users\\rizek\\plugins\\qgis-bridge\\references\\installer-provenance.md"}
+    ],
+    "exposure": "bridge-owned-authenticated-loopback",
+    "typedReads": ["application-identity","project-identity","layer-inventory","renderer-summary","layout-inventory","crs-observation"],
+    "typedWrites": ["add-owned-layer","set-single-symbol","rename-owned-layer","ensure-layout","remove-owned-layer"],
+    "admissionCommand": {"command":"node","args":["--test","tests/admission.test.mjs"],"cwd":"C:\\Users\\rizek\\plugins\\qgis-bridge","timeoutMs":120000},
+    "independentReadback": true,
+    "exactRollback": true,
+    "controllerOnly": false,
+    "uiAutomation": false,
+    "screenScraping": false,
+    "rawPassthrough": false,
+    "exportOnly": false
+  },
+  "adapter": "reverse-polling-extension",
+  "adapterRoots": ["qgis-extension"],
+  "sourceRoot": "C:\\Users\\rizek\\plugins\\qgis-bridge",
+  "sourceProvenance": {"vcs":"git","requireClean":true,"digestPolicy":"bridge-source/v1"},
+  "stateRoot": "C:\\Users\\rizek\\.codex\\state\\plugins\\qgis-bridge\\v1",
+  "compatibility": {"target":"Windows x86-64; QGIS 4.2.0; PyQGIS QGIS_VERSION_INT 40200; bridge 0.1.0"},
+  "testCommands": [
+    {"command":"npm","args":["run","validate"],"cwd":"C:\\Users\\rizek\\plugins\\qgis-bridge","timeoutMs":120000},
+    {"command":"npm","args":["run","test:live"],"cwd":"C:\\Users\\rizek\\plugins\\qgis-bridge","timeoutMs":300000}
+  ],
+  "certificationTiers": ["api-contract-admission","package-design-audit","protocol-negative-tests","isolated-native-fixture","live-application-canary","rollback-recovery-discovery"],
+  "nativeCanary": {"command":{"command":"node","args":["scripts/live-canary.mjs"],"cwd":"C:\\Users\\rizek\\plugins\\qgis-bridge","timeoutMs":300000},"independentReadback":true},
+  "rollback": {"receiptSchema":"qgis-bridge/receipt/v1","exactBytes":true},
+  "release": {"targets":[
+    {"marketplace":"personal","selector":"qgis-bridge@personal","license":"GPL-3.0-or-later","requiresCertificate":true,"freshTask":true},
+    {"marketplace":"arkheos","selector":"qgis-bridge@arkheos","license":"GPL-3.0-or-later","requiresCertificate":true,"freshTask":true}
+  ]}
+}
+

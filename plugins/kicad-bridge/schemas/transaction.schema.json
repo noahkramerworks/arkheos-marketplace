@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kicad-bridge/transaction/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["boardPath", "expectedRevision", "actions"],
+  "properties": {
+    "boardPath": {"type":"string","pattern":"^[A-Za-z]:\\\\.*\\.kicad_pcb$"},
+    "expectedRevision": {"type":"string","pattern":"^sha256:[a-f0-9]{64}$"},
+    "actions": {
+      "type": "array", "minItems": 1, "maxItems": 32,
+      "items": {
+        "oneOf": [
+          {"type":"object","additionalProperties":false,"required":["type","value","xMm","yMm","layer"],"properties":{"type":{"const":"create_text"},"value":{"type":"string","pattern":"^ARKHEOS_BRIDGE:[A-Za-z0-9 _-]{1,64}$"},"xMm":{"type":"number","minimum":-1000,"maximum":1000},"yMm":{"type":"number","minimum":-1000,"maximum":1000},"layer":{"enum":["Cmts.User","Dwgs.User"]}}},
+          {"type":"object","additionalProperties":false,"required":["type","textId","dxMm","dyMm"],"properties":{"type":{"const":"move_owned_text"},"textId":{"type":"string","pattern":"^(@last_created|[0-9a-fA-F-]{36})$"},"dxMm":{"type":"number","minimum":-250,"maximum":250},"dyMm":{"type":"number","minimum":-250,"maximum":250}}},
+          {"type":"object","additionalProperties":false,"required":["type","title"],"properties":{"type":{"const":"set_title"},"title":{"type":"string","minLength":1,"maxLength":96,"pattern":"^[A-Za-z0-9 ._()/-]+$"}}},
+          {"type":"object","additionalProperties":false,"required":["type","textId"],"properties":{"type":{"const":"delete_owned_text"},"textId":{"type":"string","pattern":"^[0-9a-fA-F-]{36}$"}}}
+        ]
+      }
+    }
+  }
+}

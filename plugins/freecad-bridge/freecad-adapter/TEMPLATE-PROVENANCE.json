@@ -1,0 +1,6 @@
+{
+  "schema": "bridge-template-provenance/v1",
+  "adapter": "hybrid-extension-batch",
+  "templateDigest": "b089ecdda70c81eb6fe2796222d447f6f4505b58be7acbdd12bac93df14ee2cf",
+  "runtimeDependency": false
+}

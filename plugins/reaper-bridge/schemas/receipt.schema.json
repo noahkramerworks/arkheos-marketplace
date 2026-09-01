@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "reaper-bridge/receipt/v1",
+  "type": "object",
+  "required": ["schema", "receiptId", "projectPath", "preSha256", "postSha256", "checkpointPath", "preRevision", "postRevision", "actions", "createdAt"]
+}
+

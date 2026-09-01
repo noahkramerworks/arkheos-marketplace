@@ -1,0 +1,12 @@
+{
+  "name": "godot-bridge-personal",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node --test tests/package.test.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:admission": "node tests/api-admission.mjs",
+    "test:live": "node --test tests/godot-addon.test.mjs tests/export.test.mjs"
+  }
+}
