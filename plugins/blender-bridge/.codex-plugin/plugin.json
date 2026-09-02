@@ -1,6 +1,6 @@
 {
   "name": "blender-bridge",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Certified native, reversible Blender 5.2.1 DCC control through a typed extension and verified coordinator.",
   "author": {
     "name": "Rizek"

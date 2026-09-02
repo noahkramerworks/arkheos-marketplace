@@ -1,6 +1,6 @@
 schema_version = "1.0.0"
 id = "blender_bridge"
-version = "0.2.0"
+version = "0.3.0"
 name = "Blender Bridge"
 tagline = "Verified reversible DCC control for Codex"
 maintainer = "Rizek"

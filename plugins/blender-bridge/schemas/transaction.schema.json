@@ -5,11 +5,105 @@
   "additionalProperties": false,
   "required": ["projectFile", "transactionId", "expectedRevision", "actions"],
   "properties": {
-    "projectFile": {"type": "string"},
+    "projectFile": {"type": "string", "minLength": 1},
     "transactionId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
     "expectedRevision": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
-    "externalInputs": {"type": "array", "maxItems": 32, "items": {"type": "string"}},
-    "externalWrites": {"type": "array", "maxItems": 32, "items": {"type": "string"}},
-    "actions": {"type": "array", "minItems": 1, "maxItems": 100, "items": {"type": "object", "required": ["type"], "properties": {"type": {"enum": ["ensure_collection", "create_object", "set_transform", "create_mesh", "edit_mesh", "create_curve", "create_text", "add_modifier", "ensure_material", "set_material_nodes", "ensure_geometry_nodes", "ensure_camera", "ensure_light", "set_world", "set_render", "ensure_armature", "add_bone", "set_pose", "set_weights", "ensure_action", "insert_keyframe", "import_asset", "save_project"]}}}}
+    "externalInputs": {"type": "array", "maxItems": 32, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "externalWrites": {"type": "array", "maxItems": 32, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "actions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "oneOf": [
+          {"$ref": "#/$defs/ensureCollection"},
+          {"$ref": "#/$defs/createObject"},
+          {"$ref": "#/$defs/setTransform"},
+          {"$ref": "#/$defs/createMesh"},
+          {"$ref": "#/$defs/editMesh"},
+          {"$ref": "#/$defs/createCurve"},
+          {"$ref": "#/$defs/createText"},
+          {"$ref": "#/$defs/addModifier"},
+          {"$ref": "#/$defs/ensureMaterial"},
+          {"$ref": "#/$defs/setMaterialNodes"},
+          {"$ref": "#/$defs/ensureGeometryNodes"},
+          {"$ref": "#/$defs/ensureCamera"},
+          {"$ref": "#/$defs/ensureLight"},
+          {"$ref": "#/$defs/setWorld"},
+          {"$ref": "#/$defs/setRender"},
+          {"$ref": "#/$defs/ensureArmature"},
+          {"$ref": "#/$defs/addBone"},
+          {"$ref": "#/$defs/setPose"},
+          {"$ref": "#/$defs/setWeights"},
+          {"$ref": "#/$defs/ensureAction"},
+          {"$ref": "#/$defs/insertKeyframe"},
+          {"$ref": "#/$defs/writePoseAction"},
+          {"$ref": "#/$defs/importAsset"},
+          {"$ref": "#/$defs/saveProject"}
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "name": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[^\\u0000-\\u001f\\u007f]+$"},
+    "number": {"type": "number", "minimum": -1000000, "maximum": 1000000},
+    "positiveNumber": {"type": "number", "exclusiveMinimum": 0, "maximum": 1000000},
+    "frame": {"type": "integer", "minimum": -1048574, "maximum": 1048574},
+    "vec3": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/number"}},
+    "positiveVec3": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/positiveNumber"}},
+    "vec4": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/number"}},
+    "indexList": {"type": "array", "minItems": 1, "maxItems": 50000, "uniqueItems": true, "items": {"type": "integer", "minimum": 0}},
+    "ensureCollection": {"type": "object", "additionalProperties": false, "required": ["type", "name"], "properties": {"type": {"const": "ensure_collection"}, "name": {"$ref": "#/$defs/name"}}},
+    "createObject": {"type": "object", "additionalProperties": false, "required": ["type", "name"], "properties": {"type": {"const": "create_object"}, "name": {"$ref": "#/$defs/name"}, "collection": {"$ref": "#/$defs/name"}}},
+    "setTransform": {"type": "object", "additionalProperties": false, "required": ["type", "object"], "properties": {"type": {"const": "set_transform"}, "object": {"$ref": "#/$defs/name"}, "location": {"$ref": "#/$defs/vec3"}, "rotationEuler": {"$ref": "#/$defs/vec3"}, "scale": {"$ref": "#/$defs/positiveVec3"}}},
+    "createMesh": {
+      "type": "object", "additionalProperties": false, "required": ["type", "name", "dataName", "vertices", "faces"],
+      "properties": {
+        "type": {"const": "create_mesh"}, "name": {"$ref": "#/$defs/name"}, "dataName": {"$ref": "#/$defs/name"}, "collection": {"$ref": "#/$defs/name"},
+        "vertices": {"type": "array", "maxItems": 16666, "items": {"$ref": "#/$defs/vec3"}},
+        "edges": {"type": "array", "maxItems": 25000, "items": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer", "minimum": 0}}},
+        "faces": {"type": "array", "maxItems": 12500, "items": {"type": "array", "minItems": 3, "maxItems": 1024, "items": {"type": "integer", "minimum": 0}}}
+      }
+    },
+    "editMesh": {
+      "type": "object", "additionalProperties": false, "required": ["type", "object", "setVertices"],
+      "properties": {"type": {"const": "edit_mesh"}, "object": {"$ref": "#/$defs/name"}, "setVertices": {"type": "array", "maxItems": 12500, "items": {"type": "object", "additionalProperties": false, "required": ["index", "co"], "properties": {"index": {"type": "integer", "minimum": 0}, "co": {"$ref": "#/$defs/vec3"}}}}}
+    },
+    "createCurve": {"type": "object", "additionalProperties": false, "required": ["type", "name", "dataName", "points"], "properties": {"type": {"const": "create_curve"}, "name": {"$ref": "#/$defs/name"}, "dataName": {"$ref": "#/$defs/name"}, "collection": {"$ref": "#/$defs/name"}, "points": {"type": "array", "minItems": 1, "maxItems": 16666, "items": {"$ref": "#/$defs/vec3"}}}},
+    "createText": {"type": "object", "additionalProperties": false, "required": ["type", "name", "dataName"], "properties": {"type": {"const": "create_text"}, "name": {"$ref": "#/$defs/name"}, "dataName": {"$ref": "#/$defs/name"}, "collection": {"$ref": "#/$defs/name"}, "body": {"type": "string", "maxLength": 16384}}},
+    "addModifier": {"type": "object", "additionalProperties": false, "required": ["type", "object", "name", "modifierType"], "properties": {"type": {"const": "add_modifier"}, "object": {"$ref": "#/$defs/name"}, "name": {"$ref": "#/$defs/name"}, "modifierType": {"enum": ["BEVEL", "SUBSURF", "MIRROR", "SOLIDIFY", "ARRAY", "NODES"]}, "width": {"type": "number", "minimum": 0, "maximum": 1000000}, "levels": {"type": "integer", "minimum": 0, "maximum": 6}}},
+    "ensureMaterial": {"type": "object", "additionalProperties": false, "required": ["type", "name"], "properties": {"type": {"const": "ensure_material"}, "name": {"$ref": "#/$defs/name"}, "object": {"$ref": "#/$defs/name"}, "baseColor": {"$ref": "#/$defs/vec4"}}},
+    "shaderNode": {"type": "object", "additionalProperties": false, "required": ["name", "nodeType"], "properties": {"name": {"$ref": "#/$defs/name"}, "nodeType": {"enum": ["ShaderNodeOutputMaterial", "ShaderNodeBsdfPrincipled", "ShaderNodeTexNoise", "ShaderNodeValToRGB", "ShaderNodeEmission"]}}},
+    "nodeLink": {"type": "object", "additionalProperties": false, "required": ["fromNode", "fromSocket", "toNode", "toSocket"], "properties": {"fromNode": {"$ref": "#/$defs/name"}, "fromSocket": {"type": "integer", "minimum": 0, "maximum": 255}, "toNode": {"$ref": "#/$defs/name"}, "toSocket": {"type": "integer", "minimum": 0, "maximum": 255}}},
+    "setMaterialNodes": {"type": "object", "additionalProperties": false, "required": ["type", "material"], "properties": {"type": {"const": "set_material_nodes"}, "material": {"$ref": "#/$defs/name"}, "clear": {"type": "boolean"}, "nodes": {"type": "array", "maxItems": 256, "items": {"$ref": "#/$defs/shaderNode"}}, "links": {"type": "array", "maxItems": 256, "items": {"$ref": "#/$defs/nodeLink"}}}},
+    "geometryNode": {"type": "object", "additionalProperties": false, "required": ["name", "nodeType"], "properties": {"name": {"$ref": "#/$defs/name"}, "nodeType": {"enum": ["NodeGroupInput", "NodeGroupOutput", "GeometryNodeJoinGeometry", "GeometryNodeSetPosition", "GeometryNodeTransform"]}}},
+    "ensureGeometryNodes": {"type": "object", "additionalProperties": false, "required": ["type", "name"], "properties": {"type": {"const": "ensure_geometry_nodes"}, "name": {"$ref": "#/$defs/name"}, "object": {"$ref": "#/$defs/name"}, "modifier": {"$ref": "#/$defs/name"}, "nodes": {"type": "array", "maxItems": 256, "items": {"$ref": "#/$defs/geometryNode"}}}},
+    "ensureCamera": {"type": "object", "additionalProperties": false, "required": ["type", "name", "dataName"], "properties": {"type": {"const": "ensure_camera"}, "name": {"$ref": "#/$defs/name"}, "dataName": {"$ref": "#/$defs/name"}, "collection": {"$ref": "#/$defs/name"}, "location": {"$ref": "#/$defs/vec3"}, "rotationEuler": {"$ref": "#/$defs/vec3"}}},
+    "ensureLight": {"type": "object", "additionalProperties": false, "required": ["type", "name", "dataName"], "properties": {"type": {"const": "ensure_light"}, "name": {"$ref": "#/$defs/name"}, "dataName": {"$ref": "#/$defs/name"}, "collection": {"$ref": "#/$defs/name"}, "lightType": {"enum": ["POINT", "SUN", "SPOT", "AREA"]}, "energy": {"type": "number", "minimum": 0, "maximum": 1000000000}, "location": {"$ref": "#/$defs/vec3"}}},
+    "setWorld": {"type": "object", "additionalProperties": false, "required": ["type"], "properties": {"type": {"const": "set_world"}, "name": {"$ref": "#/$defs/name"}, "color": {"$ref": "#/$defs/vec4"}, "strength": {"type": "number", "minimum": 0, "maximum": 1000000}}},
+    "setRender": {"type": "object", "additionalProperties": false, "required": ["type"], "properties": {"type": {"const": "set_render"}, "engine": {"enum": ["BLENDER_EEVEE", "BLENDER_WORKBENCH", "CYCLES"]}, "width": {"type": "integer", "minimum": 1, "maximum": 16384}, "height": {"type": "integer", "minimum": 1, "maximum": 16384}}},
+    "ensureArmature": {"type": "object", "additionalProperties": false, "required": ["type", "name", "dataName"], "properties": {"type": {"const": "ensure_armature"}, "name": {"$ref": "#/$defs/name"}, "dataName": {"$ref": "#/$defs/name"}, "collection": {"$ref": "#/$defs/name"}}},
+    "addBone": {"type": "object", "additionalProperties": false, "required": ["type", "armature", "name"], "properties": {"type": {"const": "add_bone"}, "armature": {"$ref": "#/$defs/name"}, "name": {"$ref": "#/$defs/name"}, "head": {"$ref": "#/$defs/vec3"}, "tail": {"$ref": "#/$defs/vec3"}}},
+    "setPose": {"type": "object", "additionalProperties": false, "required": ["type", "armature", "bone"], "properties": {"type": {"const": "set_pose"}, "armature": {"$ref": "#/$defs/name"}, "bone": {"$ref": "#/$defs/name"}, "location": {"$ref": "#/$defs/vec3"}, "rotationEuler": {"$ref": "#/$defs/vec3"}}},
+    "setWeights": {"type": "object", "additionalProperties": false, "required": ["type", "object", "group", "indices", "weight"], "properties": {"type": {"const": "set_weights"}, "object": {"$ref": "#/$defs/name"}, "group": {"$ref": "#/$defs/name"}, "indices": {"$ref": "#/$defs/indexList"}, "weight": {"type": "number", "minimum": 0, "maximum": 1}}},
+    "ensureAction": {"type": "object", "additionalProperties": false, "required": ["type", "object", "name"], "properties": {"type": {"const": "ensure_action"}, "object": {"$ref": "#/$defs/name"}, "name": {"$ref": "#/$defs/name"}}},
+    "insertKeyframe": {"type": "object", "additionalProperties": false, "required": ["type", "object", "frame"], "properties": {"type": {"const": "insert_keyframe"}, "object": {"$ref": "#/$defs/name"}, "frame": {"$ref": "#/$defs/frame"}, "property": {"enum": ["location", "rotation_euler", "rotation_quaternion", "scale"]}, "index": {"type": "integer", "minimum": -1, "maximum": 3}}},
+    "poseKey": {
+      "type": "object", "additionalProperties": false, "required": ["bone", "frame"],
+      "properties": {"bone": {"$ref": "#/$defs/name"}, "frame": {"$ref": "#/$defs/frame"}, "location": {"$ref": "#/$defs/vec3"}, "rotationQuaternion": {"$ref": "#/$defs/vec4"}, "scale": {"$ref": "#/$defs/positiveVec3"}, "interpolation": {"enum": ["BEZIER", "LINEAR", "CONSTANT"]}},
+      "anyOf": [{"required": ["location"]}, {"required": ["rotationQuaternion"]}, {"required": ["scale"]}]
+    },
+    "writePoseAction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["type", "armature", "name", "frameStart", "frameEnd", "writeMode", "defaultInterpolation", "keys"],
+      "properties": {
+        "type": {"const": "write_pose_action"}, "armature": {"$ref": "#/$defs/name"}, "name": {"$ref": "#/$defs/name"},
+        "frameStart": {"$ref": "#/$defs/frame"}, "frameEnd": {"$ref": "#/$defs/frame"},
+        "writeMode": {"enum": ["reject", "replace-compatible"]}, "defaultInterpolation": {"enum": ["BEZIER", "LINEAR", "CONSTANT"]},
+        "keys": {"type": "array", "minItems": 1, "maxItems": 4096, "items": {"$ref": "#/$defs/poseKey"}}
+      }
+    },
+    "importAsset": {"type": "object", "additionalProperties": false, "required": ["type", "path"], "properties": {"type": {"const": "import_asset"}, "path": {"type": "string", "minLength": 1}}},
+    "saveProject": {"type": "object", "additionalProperties": false, "required": ["type"], "properties": {"type": {"const": "save_project"}}}
   }
 }

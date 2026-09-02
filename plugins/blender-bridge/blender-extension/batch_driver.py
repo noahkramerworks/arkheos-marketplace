@@ -38,13 +38,23 @@ def main():
     elif operation == "export":
         fmt = request["format"]
         options = request.get("options", {})
-        if fmt == "glb": bpy.ops.export_scene.gltf(filepath=output, export_format="GLB", use_selection=bool(options.get("selectedOnly", False)))
+        if fmt == "glb":
+            bpy.ops.export_scene.gltf(
+                filepath=output,
+                export_format="GLB",
+                use_selection=bool(options.get("selectedOnly", False)),
+                export_animations=bool(options.get("animation", True)),
+                export_materials="EXPORT" if bool(options.get("materials", True)) else "NONE",
+                export_extras=bool(options.get("extras", False)),
+            )
         elif fmt == "fbx": bpy.ops.export_scene.fbx(filepath=output, use_selection=bool(options.get("selectedOnly", False)), apply_unit_scale=True)
         elif fmt == "usd": bpy.ops.wm.usd_export(filepath=output, selected_objects_only=bool(options.get("selectedOnly", False)), export_animation=bool(options.get("animation", True)))
         elif fmt == "obj": bpy.ops.wm.obj_export(filepath=output, export_selected_objects=bool(options.get("selectedOnly", False)), export_materials=bool(options.get("materials", True)))
         elif fmt == "alembic": bpy.ops.wm.alembic_export(filepath=output, selected=bool(options.get("selectedOnly", False)), start=int(options.get("start", bpy.context.scene.frame_start)), end=int(options.get("end", bpy.context.scene.frame_end)))
         else: raise RuntimeError("export format not admitted")
         native = {"format": fmt, "objects": len(bpy.context.scene.objects), "frameRange": [bpy.context.scene.frame_start, bpy.context.scene.frame_end]}
+        if fmt == "glb":
+            native["options"] = {"animation": bool(options.get("animation", True)), "materials": bool(options.get("materials", True)), "extras": bool(options.get("extras", False)), "selectedOnly": bool(options.get("selectedOnly", False))}
     else:
         raise RuntimeError("batch operation not admitted")
     file = Path(output)

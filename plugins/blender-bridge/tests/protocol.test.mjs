@@ -10,8 +10,10 @@ import { PROTOCOL } from "../mcp/protocol.mjs";
 test("MCP initialization and sixteen tools", async () => {
   const runtime = { stateRoot: mkdtempSync(path.join(os.tmpdir(), "blender-protocol-")), coordinator: { start: async () => {} } };
   const init = await handleRpc({ jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-06-18" } }, runtime);
-  assert.equal(init.result.serverInfo.name, "blender-bridge"); assert.equal(init.result.serverInfo.version, "0.2.0");
+  assert.equal(init.result.serverInfo.name, "blender-bridge"); assert.equal(init.result.serverInfo.version, "0.3.0");
   const list = await handleRpc({ jsonrpc: "2.0", id: 2, method: "tools/list" }, runtime); assert.equal(list.result.tools.length, 16); assert.deepEqual(list.result.tools, TOOLS);
+  const transaction = list.result.tools.find((item) => item.name === "apply_transaction").inputSchema;
+  assert.equal(transaction.$id, undefined); assert.equal(transaction.properties.actions.items.oneOf.length, 24);
   const unknown = await handleRpc({ jsonrpc: "2.0", id: 3, method: "tools/call", params: { name: "execute_python" } }, runtime); assert.equal(unknown.error.code, -32602);
 });
 test("loopback rejects authentication and isolates project queues", async () => {

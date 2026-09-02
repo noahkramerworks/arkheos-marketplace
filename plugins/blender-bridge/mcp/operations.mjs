@@ -7,8 +7,9 @@ import { assertRecoveryClear, checkpoint, enrollmentPath, fileSha, projectId, re
 import { MAX_LOG_BYTES } from "./protocol.mjs";
 
 const sourceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const ACTIONS = new Set(["ensure_collection", "create_object", "set_transform", "create_mesh", "edit_mesh", "create_curve", "create_text", "add_modifier", "ensure_material", "set_material_nodes", "ensure_geometry_nodes", "ensure_camera", "ensure_light", "set_world", "set_render", "ensure_armature", "add_bone", "set_pose", "set_weights", "ensure_action", "insert_keyframe", "import_asset", "save_project"]);
+const ACTIONS = new Set(["ensure_collection", "create_object", "set_transform", "create_mesh", "edit_mesh", "create_curve", "create_text", "add_modifier", "ensure_material", "set_material_nodes", "ensure_geometry_nodes", "ensure_camera", "ensure_light", "set_world", "set_render", "ensure_armature", "add_bone", "set_pose", "set_weights", "ensure_action", "insert_keyframe", "write_pose_action", "import_asset", "save_project"]);
 const FORBIDDEN_KEYS = /python|bpy|operator|rna|driver|expression|script|shell|command/i;
+const transactionSchema = JSON.parse(readFileSync(path.join(sourceRoot, "schemas", "transaction.schema.json"), "utf8"));
 
 function spawn(command, args, options) {
   const normalized = args[0] === "--background" && String(args[1] || "").toLowerCase().endsWith(".blend") ? [args[1], args[0], ...args.slice(2)] : args;
@@ -17,14 +18,76 @@ function spawn(command, args, options) {
 
 function runtimeRoot(runtime) { return runtime.stateRoot; }
 function bounded(value) { const bytes = Buffer.byteLength(JSON.stringify(value)); if (bytes > 4 * 1024 * 1024) throw new Error("Payload exceeds 4 MiB"); return bytes; }
+function schemaTarget(root, reference) {
+  if (!reference.startsWith("#/$defs/")) throw new Error(`Unsupported schema reference: ${reference}`);
+  const target = root.$defs?.[reference.slice(8)];
+  if (!target) throw new Error(`Unknown schema reference: ${reference}`);
+  return target;
+}
+function matchesSchema(value, schema, root, pointer = "input") {
+  if (schema.$ref) return matchesSchema(value, schemaTarget(root, schema.$ref), root, pointer);
+  if (schema.oneOf) {
+    const matches = schema.oneOf.filter((item) => { try { matchesSchema(value, item, root, pointer); return true; } catch { return false; } });
+    if (matches.length !== 1) throw new Error(`${pointer} must match exactly one admitted shape`);
+  }
+  if (schema.anyOf && !schema.anyOf.some((item) => { try { matchesSchema(value, item, root, pointer); return true; } catch { return false; } })) throw new Error(`${pointer} is missing an admitted alternative`);
+  if (Object.hasOwn(schema, "const") && value !== schema.const) throw new Error(`${pointer} must equal ${schema.const}`);
+  if (schema.enum && !schema.enum.includes(value)) throw new Error(`${pointer} is not admitted`);
+  if (schema.type === "object") {
+    if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error(`${pointer} must be an object`);
+    for (const key of schema.required || []) if (!Object.hasOwn(value, key)) throw new Error(`${pointer}.${key} is required`);
+    if (schema.additionalProperties === false) for (const key of Object.keys(value)) if (!Object.hasOwn(schema.properties || {}, key)) throw new Error(`${pointer}.${key} is not admitted`);
+    for (const [key, item] of Object.entries(value)) if (schema.properties?.[key]) matchesSchema(item, schema.properties[key], root, `${pointer}.${key}`);
+  } else if (schema.type === "array") {
+    if (!Array.isArray(value)) throw new Error(`${pointer} must be an array`);
+    if (schema.minItems !== undefined && value.length < schema.minItems) throw new Error(`${pointer} has too few items`);
+    if (schema.maxItems !== undefined && value.length > schema.maxItems) throw new Error(`${pointer} has too many items`);
+    if (schema.uniqueItems && new Set(value.map(stable)).size !== value.length) throw new Error(`${pointer} must contain unique items`);
+    if (schema.items) value.forEach((item, index) => matchesSchema(item, schema.items, root, `${pointer}[${index}]`));
+  } else if (schema.type === "string") {
+    if (typeof value !== "string") throw new Error(`${pointer} must be a string`);
+    if (schema.minLength !== undefined && value.length < schema.minLength) throw new Error(`${pointer} is too short`);
+    if (schema.maxLength !== undefined && value.length > schema.maxLength) throw new Error(`${pointer} is too long`);
+    if (schema.pattern && !new RegExp(schema.pattern, "u").test(value)) throw new Error(`${pointer} has invalid format`);
+  } else if (schema.type === "integer") {
+    if (!Number.isSafeInteger(value)) throw new Error(`${pointer} must be a safe integer`);
+  } else if (schema.type === "number") {
+    if (typeof value !== "number" || !Number.isFinite(value)) throw new Error(`${pointer} must be finite`);
+  } else if (schema.type === "boolean" && typeof value !== "boolean") throw new Error(`${pointer} must be boolean`);
+  if ((schema.type === "integer" || schema.type === "number") && schema.minimum !== undefined && value < schema.minimum) throw new Error(`${pointer} is below its minimum`);
+  if ((schema.type === "integer" || schema.type === "number") && schema.maximum !== undefined && value > schema.maximum) throw new Error(`${pointer} exceeds its maximum`);
+  if ((schema.type === "integer" || schema.type === "number") && schema.exclusiveMinimum !== undefined && value <= schema.exclusiveMinimum) throw new Error(`${pointer} must be greater than its minimum`);
+  return true;
+}
 export function validateTransaction(input) {
   bounded(input);
-  if (!/^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/.test(input.transactionId || "")) throw new Error("Invalid transactionId");
-  if (!/^sha256:[a-f0-9]{64}$/.test(input.expectedRevision || "")) throw new Error("Invalid expectedRevision");
-  if (!Array.isArray(input.actions) || !input.actions.length || input.actions.length > 100) throw new Error("actions must contain 1..100 items");
+  matchesSchema(input, transactionSchema, transactionSchema);
   let numbers = 0; let nodes = 0;
   const walk = (value) => { if (typeof value === "number") numbers++; else if (Array.isArray(value)) value.forEach(walk); else if (value && typeof value === "object") for (const [key, item] of Object.entries(value)) { if (FORBIDDEN_KEYS.test(key)) throw new Error(`Forbidden action field: ${key}`); walk(item); } };
-  for (const action of input.actions) { if (!action || typeof action !== "object" || !ACTIONS.has(action.type)) throw new Error(`Unsupported action: ${action?.type}`); walk(action); nodes += (action.nodes?.length || 0) + (action.links?.length || 0); }
+  for (const action of input.actions) {
+    if (!ACTIONS.has(action.type)) throw new Error(`Unsupported action: ${action?.type}`);
+    walk(action); nodes += (action.nodes?.length || 0) + (action.links?.length || 0);
+    if (action.type === "insert_keyframe") {
+      const property = action.property || "location";
+      const maxIndex = property === "rotation_quaternion" ? 3 : 2;
+      if ((action.index ?? -1) > maxIndex) throw new Error(`insert_keyframe index is invalid for ${property}`);
+    }
+    if (action.type === "write_pose_action") {
+      if (action.frameStart > action.frameEnd) throw new Error("write_pose_action frameStart must not exceed frameEnd");
+      const pairs = new Set(); const bones = new Set();
+      for (const key of action.keys) {
+        if (key.frame < action.frameStart || key.frame > action.frameEnd) throw new Error("write_pose_action key frame is outside the declared range");
+        const pair = `${key.bone}\u0000${key.frame}`;
+        if (pairs.has(pair)) throw new Error("write_pose_action bone/frame keys must be unique");
+        pairs.add(pair); bones.add(key.bone);
+        if (key.rotationQuaternion) {
+          const norm = Math.hypot(...key.rotationQuaternion);
+          if (Math.abs(norm - 1) > 1e-4) throw new Error("write_pose_action rotationQuaternion must be unit length");
+        }
+      }
+      if (bones.size > 256) throw new Error("write_pose_action exceeds 256 bones");
+    }
+  }
   if (numbers > 50000) throw new Error("Geometry payload exceeds 50,000 numeric scalars");
   if (nodes > 256) throw new Error("Node payload exceeds 256 records");
   for (const file of [...(input.externalInputs || []), ...(input.externalWrites || [])]) if (!path.isAbsolute(file)) throw new Error("External paths must be absolute");
@@ -44,5 +107,5 @@ export function inspectRender({ renderId, cursor = 0 }, runtime) { const record 
 export function captureRender({ renderId }, runtime) { const record = runtime.jobs?.get(renderId); if (!record || record.status !== "completed" || record.operation !== "render") throw new Error("Render is not completed"); return { status: "captured", renderId, ...record.result, pngBase64: readFileSync(record.final).toString("base64") }; }
 export function stopRender({ renderId }, runtime) { const record = runtime.jobs?.get(renderId); if (!record || record.operation !== "render") throw new Error("Unknown renderId"); if (record.status !== "running") return { status: record.status, renderId }; record.child.kill(); record.status = "cancelled"; if (existsSync(record.staging)) rmSync(record.staging, { force: true }); return { status: "cancelled", renderId }; }
 export async function captureViewport(args, runtime) { const record = startBatch({ ...args, operation: "viewport" }, runtime); await new Promise((resolve) => record.child.once("exit", resolve)); if (record.status !== "completed") throw new Error(record.error || "Viewport capture failed"); return { status: "captured", captureMode: runtime.coordinator?.isConnected(record.projectFile) ? "deterministic-offscreen-fallback" : "deterministic-offscreen", ...record.result, pngBase64: readFileSync(record.final).toString("base64") }; }
-export async function exportArtifact(args, runtime) { const allowed = { glb: ".glb", fbx: ".fbx", usd: ".usd", obj: ".obj", alembic: ".abc" }; if (!allowed[args.format] || path.extname(args.outputPath).toLowerCase() !== allowed[args.format]) throw new Error("Export extension does not match admitted format"); const closed = new Set(["selectedOnly", "animation", "materials", "start", "end"]); for (const key of Object.keys(args.options || {})) if (!closed.has(key)) throw new Error(`Unknown export option: ${key}`); const record = startBatch({ ...args, operation: "export" }, runtime); await new Promise((resolve) => record.child.once("exit", resolve)); if (record.status !== "completed") throw new Error(record.error || "Export failed"); const { receipt } = sealReceipt(runtimeRoot(runtime), { projectFile: record.projectFile, expectedRevision: record.expectedRevision, format: args.format, outputPath: record.final, size: record.result.size, sha256: record.result.finalSha256, nativeReadback: record.result.nativeReadback, createdAt: new Date().toISOString() }, "artifact"); return { status: "exported", receiptId: receipt.receiptId, ...record.result }; }
+export async function exportArtifact(args, runtime) { const allowed = { glb: ".glb", fbx: ".fbx", usd: ".usd", obj: ".obj", alembic: ".abc" }; if (!allowed[args.format] || path.extname(args.outputPath).toLowerCase() !== allowed[args.format]) throw new Error("Export extension does not match admitted format"); const closed = new Set(["selectedOnly", "animation", "materials", "extras", "start", "end"]); for (const key of Object.keys(args.options || {})) if (!closed.has(key)) throw new Error(`Unknown export option: ${key}`); if (args.options?.extras !== undefined && args.format !== "glb") throw new Error("extras is admitted only for GLB export"); const record = startBatch({ ...args, operation: "export" }, runtime); await new Promise((resolve) => record.child.once("exit", resolve)); if (record.status !== "completed") throw new Error(record.error || "Export failed"); const { receipt } = sealReceipt(runtimeRoot(runtime), { projectFile: record.projectFile, expectedRevision: record.expectedRevision, format: args.format, outputPath: record.final, size: record.result.size, sha256: record.result.finalSha256, nativeReadback: record.result.nativeReadback, createdAt: new Date().toISOString() }, "artifact"); return { status: "exported", receiptId: receipt.receiptId, ...record.result }; }
 export async function rollbackReceipt({ receiptId }, runtime) { const root = runtimeRoot(runtime); const { receipt, file } = readReceipt(root, receiptId); const marker = `${file}.rolled-back.json`; if (existsSync(marker)) return { status: "already-rolled-back", receiptId, revision: receipt.preRevision }; const projectFile = resolveProjectFile(receipt.projectFile); const current = revision(projectFile); if (current !== receipt.postRevision && current !== receipt.preRevision) throw new Error("Project bytes no longer match receipt ownership"); if (current !== receipt.preRevision) restoreCheckpoint(root, receipt.checkpointId); if (revision(projectFile) !== receipt.preRevision) { writeJson(recoveryPath(root, projectFile), { state: "manual-recovery-required", receiptId, recordedAt: new Date().toISOString() }); throw new Error("Exact rollback verification failed"); } let native = null; if (runtime.coordinator?.isConnected(projectFile)) native = await runtime.coordinator.dispatch(projectFile, "inspect", { reopen: true }); writeJson(marker, { receiptId, rolledBackAt: new Date().toISOString(), exactRestoration: true, nativeReadback: native }); return { status: "rolled-back", receiptId, revision: receipt.preRevision, exactRestoration: true, nativeReadback: native }; }
